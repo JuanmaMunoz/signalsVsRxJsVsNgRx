@@ -10,8 +10,11 @@
   </thead>
   <tbody>
     @for(row of rows; track $index){
-    <tr>
-      <td [innerHTML]="'table.' + row + '.title' | translate" class="fs-5 text-secondary"></td>
+    <tr class="fw-bold">
+      <td>
+        <i class="bi bi-graph-up-arrow text-secondary"></i>
+        <span [innerHTML]="'table.' + row + '.title' | translate" class="text-primary ms-2"></span>
+      </td>
       <td [innerHTML]="'table.' + row + '.signals' | translate"></td>
       <td [innerHTML]="'table.' + row + '.rxjs' | translate"></td>
       <td [innerHTML]="'table.' + row + '.ngrx' | translate"></td>
