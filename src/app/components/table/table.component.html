@@ -1,0 +1,21 @@
+<h2 [innerHTML]="'table.title' | translate" class="text-primary mt-5 mb-2"></h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Signals</th>
+      <th>RxJs</th>
+      <th>NgRx</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(row of rows; track $index){
+    <tr>
+      <td [innerHTML]="'table.' + row + '.title' | translate" class="fs-5 text-secondary"></td>
+      <td [innerHTML]="'table.' + row + '.signals' | translate"></td>
+      <td [innerHTML]="'table.' + row + '.rxjs' | translate"></td>
+      <td [innerHTML]="'table.' + row + '.ngrx' | translate"></td>
+    </tr>
+    }
+  </tbody>
+</table>

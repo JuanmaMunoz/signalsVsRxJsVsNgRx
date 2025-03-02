@@ -1,0 +1,74 @@
+{
+  "introduction": {
+    "title": "¿Qué tecnología elegir para la gestión de estados de mi aplicación?",
+    "description": "<p>La arquitectura de un sistema Frontend debe estar alineada con las necesidades específicas del negocio y del producto, en lugar de basarse únicamente en tendencias o tecnologías populares sin evaluar sus ventajas e inconvenientes.</p><p>Sin embargo, muchas ofertas para el rol de Frontend Developer solicitan experiencia en tecnologías específicas sin considerar que cada proyecto presenta desafíos y objetivos particulares. La elección de herramientas y arquitecturas adecuadas debe fundamentarse en factores clave como:</p>",
+    "list": {
+      "scalability": {
+        "title": "Escalabilidad del proyecto",
+        "description": "¿Se requiere un sistema capaz de gestionar grandes volúmenes de datos y usuarios, o una solución más sencilla es suficiente?"
+      },
+      "independency": {
+        "title": "Independencia de los microfrontends",
+        "description": "¿Es esencial que los equipos y módulos estén completamente desacoplados, o pueden compartir estados y servicios?"
+      },
+      "maintenance": {
+        "title": "Mantenimiento y complejidad",
+        "description": "¿La elección tecnológica facilitará la comprensión y el mantenimiento del código a largo plazo, o añadirá una capa innecesaria de complejidad?"
+      },
+      "reactivity": {
+        "title": "Reactividad y gestión del estado",
+        "description": "¿Es necesario adoptar un enfoque estructurado como NgRx, o soluciones más ligeras como RxJS o Signals pueden ser más adecuadas?"
+      },
+      "capacity": {
+        "title": "Capacidades del equipo",
+        "description": "¿El equipo es mayormente Full-Stack con conocimientos básicos de Frontend, lo que requiere una arquitectura fácil de mantener, o se trata de un equipo especializado en Frontend que puede implementar una solución más avanzada?"
+      }
+    },
+    "conclusion": "<p>La falta de un análisis previo puede llevar a soluciones poco eficientes en términos de rendimiento, flexibilidad y facilidad de desarrollo.</p><p>En el desarrollo de aplicaciones Frontend con Angular, uno de los aspectos más críticos es la gestión del estado y el manejo de los flujos reactivos de datos entre componentes. Dependiendo de la complejidad de la aplicación y sus necesidades de escalabilidad, las herramientas y enfoques para gestionar el estado pueden variar considerablemente.</p><p>Tres de las soluciones más utilizadas para estos desafíos son RxJS Subjects, Angular Signals y NgRx. Cada una ofrece características, ventajas y desventajas particulares, por lo que su idoneidad depende del contexto y los requisitos específicos del proyecto.</p>"
+  },
+  "table": {
+    "title": "Comparativa Angular Signals <span class='text-secondary'>vs</span> RxJs Subjects <span class='text-secondary'>vs</span> NgRx",
+    "paradigm": {
+      "title": "Paradigma",
+      "signals": "Reactivo y basado en señales",
+      "rxjs": "Programación reactiva basada en streams",
+      "ngrx": "Estado centralizado basado en Redux"
+    },
+    "complexity": {
+      "title": "Complejidad",
+      "signals": "<span class='text-success'>Muy fácil de entender y usar</span>",
+      "rxjs": "<span class='text-warning'>Requiere conocimiento de RxJS</span>",
+      "ngrx": "<span class='text-danger'>Requiere conocimiento de RxJS y Redux</span>"
+    },
+    "performance": {
+      "title": "Rendimiento",
+      "signals": "<span class='text-success'>Alto (recalculado solo cuando cambia la señal)</span>",
+      "rxjs": "<span class='text-success'>Alto (gestión manual del flujo de datos)</span>",
+      "ngrx": "<span class='text-warning'>Puede ser menos eficiente por el uso de reducers e immutable state</span>"
+    },
+    "strategyChange": {
+      "title": "Estrategia de cambio",
+      "signals": "<span class='text-success'>Automática y eficiente</span>",
+      "rxjs": "<span class='text-warning'>Manual con .next()</span>",
+      "ngrx": "<span class='text-warning'>Basada en Redux (acciones, reducers y efectos)</span>"
+    },
+    "debug": {
+      "title": "Depuración",
+      "signals": "<span class='text-success'>Fácil de depurar</span>",
+      "rxjs": "<span class='text-warning'>Puede volverse complejo</span>",
+      "ngrx": "<span class='text-success'>Herramientas avanzadas como Redux DevTools</span>"
+    },
+    "appTypes": {
+      "title": "Adecuado para",
+      "signals": "Apps pequeñas, medianas y micro-fronts",
+      "rxjs": "Apps pequeñas, medianas y micro-fronts",
+      "ngrx": "Aplicaciones monolíticas grandes"
+    },
+    "compatibility": {
+      "title": "Compatibilidad",
+      "signals": "<span class='text-danger'>No disponible antes de Angular 16</span>",
+      "rxjs": "<span class='text-success'>Disponible en todas las versiones</span>",
+      "ngrx": "<span class='text-success'>Disponible en todas las versiones</span>"
+    }
+  }
+}
