@@ -28,6 +28,7 @@
   },
   "table": {
     "title": "Comparativa Angular Signals <span class='text-secondary'>vs</span> RxJs Subjects <span class='text-secondary'>vs</span> NgRx",
+    "description": "Desde mi perspectiva y basándome en mi experiencia, he elaborado esta tabla que compara las ventajas y desventajas de estas tres herramientas para la gestión de estados en una aplicación. Para ello, he considerado factores como la complejidad, el rendimiento, los tipos de aplicaciones etc. Cabe destacar que esta es mi opinión personal y cada lector podrá tener su propio punto de vista.",
     "paradigm": {
       "title": "Paradigma",
       "signals": "Reactivo y basado en señales",
@@ -60,8 +61,8 @@
     },
     "appTypes": {
       "title": "Adecuado para",
-      "signals": "Apps pequeñas, medianas y micro-fronts",
-      "rxjs": "Apps pequeñas, medianas y micro-fronts",
+      "signals": "(Apps pequeñas, medianas y micro-fronts) >= Angular 16",
+      "rxjs": "(Apps pequeñas, medianas y micro-fronts) < Angular 16",
       "ngrx": "Aplicaciones monolíticas grandes"
     },
     "compatibility": {

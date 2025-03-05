@@ -1,0 +1,14 @@
+<div class="example">
+  <h2>{{ example.title }}</h2>
+  <div class="row">
+    @if(example.configCode){
+    <div class="col-md-6">
+      <app-code [code]="example.configCode" [title]="'Service'" />
+    </div>
+
+    }
+    <div class="col-md-6"><app-code [code]="example.serviceCode" [title]="'Service'" /></div>
+    <div class="col-md-6"><app-code [code]="example.componentCode" [title]="'Component'" /></div>
+    <div class="col-md-6"><app-code [code]="example.htmlCode" [title]="'Html'" /></div>
+  </div>
+</div>

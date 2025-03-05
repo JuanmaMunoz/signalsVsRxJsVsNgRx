@@ -28,7 +28,7 @@ $success: $green;
 $info: $cyan;
 $warning: $orange;
 $danger: $red;
-$light: #ffd6fa;
+$light: #fdf4fc;
 $dark: #1a1a1a;
 //$dark: #212529;
 
@@ -50,7 +50,29 @@ body {
   font-family: 'Roboto', serif;
   //font-size: 1.1rem;
   //font-weight: 500;
-  padding: 2rem 4rem 2rem 4rem;
+}
+
+//ScrollBar
+::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bs-light);
+  border-radius: 0px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+  border-radius: 0px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-secondary);
 }
 
 .btn {
