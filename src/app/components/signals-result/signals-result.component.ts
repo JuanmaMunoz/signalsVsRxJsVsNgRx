@@ -19,10 +19,7 @@ export class SignalsResultComponent {
     private chartService: ChartService,
   ) {
     effect(() => {
-      if (this.playersService.players().length > 0) {
-        this.chartDataSets = this.chartService.createDataSets(this.playersService.players());
-        console.log(this.chartDataSets);
-      }
+      if (this.playersService.players().length) this.chartDataSets = this.chartService.createDataSets(this.playersService.players());
     });
   }
 
