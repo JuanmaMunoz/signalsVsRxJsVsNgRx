@@ -2,12 +2,12 @@ import { IExample } from '../models/interfaces';
 
 export const examples: IExample[] = [
   {
-    title: 'Signal',
+    title: 'signal',
     serviceCode: `export class PlayersService {
     public players = signal<IPlayer[]>([]);
     constructor(private http: HttpClient) {}
         
-    public getPlayersSignals(): void {
+    public getPlayers(): void {
         const url = 'assets/data/players.json';
         this.http.get<IPlayer[]>(url)
             .subscribe((data: IPlayer[]) => this.players.set(data));
@@ -15,21 +15,32 @@ export const examples: IExample[] = [
 }
 `,
     componentCode: `export class ExamplesComponent implements OnInit {
-    constructor(public playersService: PlayersService) {
-        effect(() => console.log(this.playersService.players()));
+    public chartDataSets: IDataset[] = [];
+    constructor(
+        public playersService: PlayersService, 
+        private chartService: ChartService,
+    ) {
+        effect(() => {
+          if (this.playersService.players().length > 0) {
+            this.chartDataSets = this.chartService.createDataSets(this.playersService.players());
+          }
+        });
     }
     ngOnInit(): void {
         this.playersService.getPlayersSignals();
     }
-}          `,
-    htmlCode: `<div class="example">
-    <h2>{{ example.title }}</h2>
-    @if(example.configCode){
-        <app-code [code]="example.configCode" [title]="'Service'" />
+}`,
+    htmlCode: `<div class="row">
+    @for (player of playersService.players(); track $index) {
+        <div class="col-4 text-center">
+            <app-player [player]="player" />
+        </div>
     }
-    <app-code [code]="example.serviceCode" [title]="'Service'" />
-    <app-code [code]="example.componentCode" [title]="'Component'" />
-    <app-code [code]="example.htmlCode" [title]="'Html'" />
+    @if (chartDataSets.length) {
+      <div class="col-12">
+        <app-chart [dataSets]="chartDataSets" />
+      </div>
+    }
 </div>`,
   },
 ];

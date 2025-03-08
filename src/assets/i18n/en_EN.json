@@ -71,5 +71,19 @@
       "rxjs": "<span class='text-success'>Disponible en todas las versiones</span>",
       "ngrx": "<span class='text-success'>Disponible en todas las versiones</span>"
     }
+  },
+  "examples": {
+    "title": "Comparativa de códigos",
+    "result": "Resultado",
+    "description": "<p>En esta sección vamos a realizar una comparativa de código de estas tres tecnologías. Mostraremos cómo obtener los datos de algunos futbolistas, visualizarlos en pantalla y utilizar parte de esta información para generar una gráfica.</p>",
+    "alert": "Es importante destacar que son ejemplos básicos con fines didácticos, por lo que no se incluyen algunas características esenciales en una aplicación real, ni se profundiza en los componentes utilizados para visualizar la información. Este tutorial se centra específicamente en los cambios de estado de nuestros modelos de datos.",
+    "signal": {
+      "title": "Angular Signals",
+      "description": "<p>En el método ngOnInit de nuestro componente, se invoca al servicio encargado de recuperar los datos de los futbolistas. Durante la suscripción a este servicio, los datos obtenidos se almacenan en nuestro signal mediante el método set().</p><p>Además, en el constructor del componente, se establece un effect que supervisa los cambios en el signal. De este modo, una vez que el signal players contiene la información necesaria, se ejecuta el método createDataSets() del servicio ChartService, el cual nos proporciona los datos requeridos para la gráfica.</p><p>Finalmente, en el template, se itera el signal players para renderizar el componente app-player. También pasamos los datos correspondientes al componente app-chart para generar la gráfica.</p>"
+    },
+    "rxjs": {
+      "title": "Observables RxJS",
+      "description": "<p>En el método ngOnInit de nuestro componente se invoca el servicio encargado de recuperar los datos de los futbolistas. En la suscripción al servicio, dichos datos se almacenan en nuestra señal mediante el método set(). Además, en el constructor del componente se establece un effect que supervisa los cambios en la señal, de manera que, una vez la señal players disponga de la información necesaria, se ejecute el método createChartData(). Finalmente, en el template se itera sobre la señal players para renderizar el componente app-player, y se pasan los datos correspondientes al componente app-chart para generar la gráfica.</p>"
+    }
   }
 }

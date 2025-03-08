@@ -1,5 +1,19 @@
-<div class="examples">
-  @for(example of examples; track $index){
-  <app-example [example]="example" />
+<div class="examples mt-5">
+  <h2 class="text-primary">{{ 'examples.title' | translate }}</h2>
+  <div [innerHTML]="'examples.description' | translate" class="text-secondary"></div>
+  <div class="alert alert-info" role="alert">
+    {{ 'examples.alert' | translate }}
+  </div>
+  @for (example of examples; track $index) {
+    <app-example [example]="example">
+      @switch (example.title) {
+        @case ('signal') {
+          <app-signals-result />
+        }
+        @case ('rxjs') {
+          <app-rxjs-result />
+        }
+      }
+    </app-example>
   }
 </div>

@@ -1,14 +1,20 @@
 <div class="example">
-  <h2>{{ example.title }}</h2>
+  <h3 class="text-secondary">{{ 'examples.' + example.title + '.title' | translate }}</h3>
+  <div class="text-secondary" [innerHTML]="'examples.' + example.title + '.description' | translate"></div>
   <div class="row">
-    @if(example.configCode){
-    <div class="col-md-6">
-      <app-code [code]="example.configCode" [title]="'Service'" />
-    </div>
-
+    @if (example.configCode) {
+      <div class="col-xl-12">
+        <app-code [code]="example.configCode" [title]="'Service'" />
+      </div>
     }
-    <div class="col-md-6"><app-code [code]="example.serviceCode" [title]="'Service'" /></div>
-    <div class="col-md-6"><app-code [code]="example.componentCode" [title]="'Component'" /></div>
-    <div class="col-md-6"><app-code [code]="example.htmlCode" [title]="'Html'" /></div>
+    <div class="col-xl-7">
+      <app-code [code]="example.serviceCode" [title]="'Service'" />
+      <app-code [code]="example.componentCode" [title]="'Component'" />
+      <app-code [code]="example.htmlCode" [title]="'Html'" />
+    </div>
+    <div class="col-xl-5">
+      <!--<h6 class="code__title text-primary mt-4">{{ 'examples.result' | translate }}</h6>-->
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>

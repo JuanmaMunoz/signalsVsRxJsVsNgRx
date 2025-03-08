@@ -1,22 +1,18 @@
-import { Component, effect, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { examples } from '../../info/info';
 import { IExample } from '../../models/interfaces';
-import { PlayersService } from '../../services/players.service';
 import { ExampleComponent } from '../example/example.component';
+import { RxjsResultComponent } from '../rxjs-result/rxjs-result.component';
+import { SignalsResultComponent } from '../signals-result/signals-result.component';
 
 @Component({
   selector: 'app-examples',
   standalone: true,
-  imports: [ExampleComponent],
+  imports: [ExampleComponent, RxjsResultComponent, SignalsResultComponent, TranslateModule],
   templateUrl: './examples.component.html',
   styleUrl: './examples.component.scss',
 })
-export class ExamplesComponent implements OnInit {
+export class ExamplesComponent {
   public examples: IExample[] = examples;
-  constructor(public playersService: PlayersService) {
-    effect(() => console.log(this.playersService.players()));
-  }
-  ngOnInit(): void {
-    this.playersService.getPlayersSignals();
-  }
 }

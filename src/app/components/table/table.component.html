@@ -1,25 +1,27 @@
 <h2 [innerHTML]="'table.title' | translate" class="text-primary mt-5 mb-2"></h2>
 <p class="text-secondary" [innerHTML]="'table.description' | translate"></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Signals</th>
-      <th>RxJs</th>
-      <th>NgRx</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for(row of rows; track $index){
-    <tr class="fw-bold">
-      <td>
-        <i class="bi bi-graph-up-arrow text-secondary"></i>
-        <span [innerHTML]="'table.' + row + '.title' | translate" class="text-primary ms-2"></span>
-      </td>
-      <td [innerHTML]="'table.' + row + '.signals' | translate"></td>
-      <td [innerHTML]="'table.' + row + '.rxjs' | translate"></td>
-      <td [innerHTML]="'table.' + row + '.ngrx' | translate"></td>
-    </tr>
-    }
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Signals</th>
+        <th>RxJs</th>
+        <th>NgRx</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track $index) {
+        <tr class="fw-bold">
+          <td>
+            <i class="bi bi-graph-up-arrow text-secondary"></i>
+            <span [innerHTML]="'table.' + row + '.title' | translate" class="text-primary ms-2"></span>
+          </td>
+          <td [innerHTML]="'table.' + row + '.signals' | translate"></td>
+          <td [innerHTML]="'table.' + row + '.rxjs' | translate"></td>
+          <td [innerHTML]="'table.' + row + '.ngrx' | translate"></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
