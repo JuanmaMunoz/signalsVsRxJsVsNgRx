@@ -5,11 +5,12 @@ import { IExample } from '../../models/interfaces';
 import { ExampleComponent } from '../example/example.component';
 import { RxjsResultComponent } from '../rxjs-result/rxjs-result.component';
 import { SignalsResultComponent } from '../signals-result/signals-result.component';
+import { NgrxResultComponent } from './../ngrx-result/ngrx-result.component';
 
 @Component({
   selector: 'app-examples',
   standalone: true,
-  imports: [ExampleComponent, RxjsResultComponent, SignalsResultComponent, TranslateModule],
+  imports: [ExampleComponent, RxjsResultComponent, SignalsResultComponent, NgrxResultComponent, TranslateModule],
   templateUrl: './examples.component.html',
   styleUrl: './examples.component.scss',
 })

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, delay, Observable } from 'rxjs';
 import { IPlayer } from '../models/interfaces';
 
 @Injectable({
@@ -19,5 +19,10 @@ export class PlayersService {
   public getPlayersRxJS(): void {
     const url = 'assets/data/players.json';
     this.http.get<IPlayer[]>(url).subscribe((data: IPlayer[]) => this.$players.next(data));
+  }
+
+  public getPlayersNgRx(): Observable<IPlayer[]> {
+    const url = 'assets/data/players.json';
+    return this.http.get<IPlayer[]>(url).pipe(delay(250));
   }
 }

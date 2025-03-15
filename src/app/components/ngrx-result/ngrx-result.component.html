@@ -1,0 +1,23 @@
+<div class="rxjs-result">
+  <app-buttons [time]="totalTime" (actionGetPlayers)="getPlayers()" />
+  @if (loading$ | async) {
+    <app-spinner />
+  } @else {
+    @if (error$ | async) {
+      <app-error></app-error>
+    } @else {
+      <div class="row">
+        @for (player of players$ | async; track $index) {
+          <div class="col-md-4 text-center">
+            <app-player [player]="player" />
+          </div>
+        }
+        @if (chartDataSets.length) {
+          <div class="col-12">
+            <app-chart [idChart]="'ngrx'" [dataSets]="chartDataSets" />
+          </div>
+        }
+      </div>
+    }
+  }
+</div>
