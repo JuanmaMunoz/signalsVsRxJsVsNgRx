@@ -19,7 +19,6 @@ export class ChartComponent implements AfterViewInit {
   public chartData!: ICharData;
 
   ngAfterViewInit(): void {
-    console.log('chart data');
     this.chartData = {
       labels: ['Adwards', 'Dribbling', 'Goal / Match %', 'Golden Balls', 'Max. speed km/h', 'Shot power', 'Win / Match %'],
       datasets: this.dataSets,

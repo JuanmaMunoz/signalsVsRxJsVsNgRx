@@ -1,22 +1,33 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, finalize, Subscription } from 'rxjs';
 import { IDataset, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
 import { PlayersService } from '../../services/players.service';
 import { ChartComponent } from '../chart/chart.component';
+import { ErrorComponent } from '../error/error.component';
+import { ExecutionComponent } from '../execution/execution.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 import { PlayerComponent } from './../player/player.component';
 
 @Component({
   selector: 'app-rxjs-result',
   standalone: true,
-  imports: [PlayerComponent, ChartComponent, CommonModule],
+  imports: [PlayerComponent, ChartComponent, CommonModule, ExecutionComponent, SpinnerComponent, ErrorComponent],
   templateUrl: './rxjs-result.component.html',
   styleUrl: './rxjs-result.component.scss',
 })
 export class RxjsResultComponent implements OnInit, OnDestroy {
-  public subscription = new Subscription();
   public chartDataSets: IDataset[] = [];
+  public players$: BehaviorSubject<IPlayer[]> = new BehaviorSubject([] as IPlayer[]);
+  public error$: BehaviorSubject<HttpErrorResponse | null> = new BehaviorSubject<HttpErrorResponse | null>(null);
+  public loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public startTime!: DOMHighResTimeStamp;
+  public totalTime: string = '0';
+  public startRendering: boolean = false;
+  private subscription = new Subscription();
+
   constructor(
     public playersService: PlayersService,
     private chartService: ChartService,
@@ -24,14 +35,42 @@ export class RxjsResultComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.playersService.$players.subscribe((data: IPlayer[]) => {
-        if (data.length) this.chartDataSets = this.chartService.createDataSets(data);
+      this.players$.subscribe((players: IPlayer[]) => {
+        if (players.length) {
+          this.chartDataSets = this.chartService.createDataSets(players);
+          this.startRendering = true;
+        }
       }),
     );
-    this.playersService.getPlayersRxJS();
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.startRendering) {
+      const time = (performance.now() - this.startTime - 250).toFixed(3);
+      this.startRendering = false;
+      setTimeout(() => {
+        this.totalTime = time;
+      }, 0);
+    }
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public click(): void {
+    this.startTime = performance.now();
+    this.getPlayers();
+  }
+
+  private getPlayers(): void {
+    this.loading$.next(true);
+    this.playersService
+      .getPlayers()
+      .pipe(finalize(() => this.loading$.next(false)))
+      .subscribe({
+        next: (players: IPlayer[]) => this.players$.next(players),
+        error: (error: HttpErrorResponse) => this.error$.next(error),
+      });
   }
 }

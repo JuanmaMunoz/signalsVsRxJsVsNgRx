@@ -17,7 +17,7 @@ export class PlayerEffects {
     this.actions$.pipe(
       ofType(loadPlayers),
       mergeMap(() =>
-        this.playersService.getPlayersNgRx().pipe(
+        this.playersService.getPlayers().pipe(
           map((players) => loadPlayersSuccess({ players })),
           catchError((error) => of(loadPlayersFailure({ error: error.message }))),
         ),

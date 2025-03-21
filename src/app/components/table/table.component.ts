@@ -9,13 +9,5 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  public rows: string[] = [
-    'paradigm',
-    'complexity',
-    'performance',
-    'strategyChange',
-    'debug',
-    'appTypes',
-    'compatibility',
-  ];
+  public rows: string[] = ['paradigm', 'complexity', 'performance', 'strategyChange', 'unsubscribe', 'debug', 'appTypes', 'compatibility'];
 }

@@ -98,3 +98,11 @@ td {
     font-size: 0.9rem;
   }
 }
+
+.btn-outline-primary {
+  color: var(--bs-primary) !important;
+}
+
+.btn-outline-primary:hover {
+  color: var(--bs-light) !important;
+}

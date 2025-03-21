@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
 import { IPlayer } from './../models/interfaces';
 import { loadPlayers, loadPlayersFailure, loadPlayersSuccess } from './players.actions';
@@ -5,7 +6,7 @@ import { loadPlayers, loadPlayersFailure, loadPlayersSuccess } from './players.a
 export interface PlayerState {
   players: IPlayer[];
   loading: boolean;
-  error: string | null;
+  error: HttpErrorResponse | null;
 }
 
 export const initialState: PlayerState = {

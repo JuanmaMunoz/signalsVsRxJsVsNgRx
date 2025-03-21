@@ -4,6 +4,7 @@
   <div class="alert alert-info" role="alert">
     {{ 'examples.alert' | translate }}
   </div>
+  <app-code [code]="serviceCode" [title]="'Service'" />
   @for (example of examples; track $index) {
     <app-example [example]="example">
       @switch (example.title) {

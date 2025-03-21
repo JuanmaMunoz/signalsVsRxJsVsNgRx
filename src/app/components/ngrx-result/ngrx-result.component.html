@@ -1,10 +1,8 @@
 <div class="rxjs-result">
-  <app-buttons [time]="totalTime" (actionGetPlayers)="getPlayers()" />
-  @if (loading$ | async) {
-    <app-spinner />
-  } @else {
+  <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
+  @if (!(loading$ | async)) {
     @if (error$ | async) {
-      <app-error></app-error>
+      <app-error [error]="error$ | async"></app-error>
     } @else {
       <div class="row">
         @for (player of players$ | async; track $index) {

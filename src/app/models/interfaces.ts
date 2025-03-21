@@ -12,8 +12,10 @@ export interface IPlayer {
 }
 
 export interface IExample {
+  actionsCode?: string;
+  reducersCode?: string;
+  effectsCode?: string;
   configCode?: string;
-  serviceCode: string;
   componentCode: string;
   htmlCode: string;
   title: string;
