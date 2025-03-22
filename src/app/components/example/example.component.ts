@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IExample } from '../../models/interfaces';
+import { UtilsService } from '../../services/utils.service';
 import { CodeComponent } from '../code/code.component';
 
 @Component({
@@ -12,4 +13,9 @@ import { CodeComponent } from '../code/code.component';
 })
 export class ExampleComponent {
   @Input() example!: IExample;
+  constructor(public utilsService: UtilsService) {}
+
+  public changeIsNgRxSignals(): void {
+    this.utilsService.isNgRxSignals = !this.utilsService.isNgRxSignals;
+  }
 }

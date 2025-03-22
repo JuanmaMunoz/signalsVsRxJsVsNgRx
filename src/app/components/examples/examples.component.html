@@ -15,7 +15,14 @@
           <app-rxjs-result />
         }
         @case ('ngrx') {
-          <app-ngrx-result />
+          @if (!utilsService.isNgRxSignals) {
+            <app-ngrx-result />
+          }
+        }
+        @case ('ngrxSignal') {
+          @if (utilsService.isNgRxSignals) {
+            <app-ngrx-signal-result />
+          }
         }
       }
     </app-example>

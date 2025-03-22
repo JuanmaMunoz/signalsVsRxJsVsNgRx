@@ -181,4 +181,58 @@ export const examples: IExample[] = [
   }
 </div>`,
   },
+  {
+    title: 'ngrxSignal',
+    componentCode: `export class NgrxResultComponent implements OnInit, OnDestroy, AfterViewChecked {
+  public chartDataSets: IDataset[] = [];
+  public players$!: Observable<IPlayer[]>;
+  public loading$!: Observable<boolean>;
+  public error$!: Observable<string | null>;
+  private subscription = new Subscription();
+
+  constructor(private store: Store<{ players: PlayerState }>,private chartService: ChartService) {
+    this.players$ = this.store.select((state) => state.players.players);
+    this.loading$ = this.store.select((state) => state.players.loading);
+    this.error$ = this.store.select((state) => state.players.error);
+  }
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.players$.subscribe((data: IPlayer[]) => {
+        if (data.length)
+          this.chartDataSets = this.chartService.createDataSets(data);
+      }),
+    );
+  }
+  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  public getPlayers(): void {
+    this.store.dispatch(loadPlayers());
+  }
+}`,
+    htmlCode: `<div class="rxjs-result">
+  <app-execution [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
+  @if (!(loading$ | async)) {
+    @if (error$ | async) {
+       <app-error [error]="error$ | async"></app-error>
+    } @else {
+        <div class="row">
+          @for (player of players$ | async; track $index) {
+            <div class="col-md-4 text-center">
+              <app-player [player]="player" />
+            </div>
+          }
+          @if (chartDataSets.length) {
+            <div class="col-12">
+              <app-chart [idChart]="'ngrx'" [dataSets]="chartDataSets" />
+            </div>
+          }
+        </div>
+    }
+  }
+</div>`,
+  },
 ];
