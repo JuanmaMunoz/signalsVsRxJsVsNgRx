@@ -1,8 +1,8 @@
-<div class="rxjs-example">
+<div class="ngrx-example">
   <app-example-introduction [example]="example" />
   <app-example-code [example]="example" />
-  <div class="rxjs-example__result">
-    <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="click()" />
+  <div class="ngrx-example__result">
+    <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
     @if (!(loading$ | async)) {
       @if (error$ | async) {
         <app-error [error]="error$ | async"></app-error>
@@ -15,7 +15,7 @@
           }
           @if (chartDataSets.length) {
             <div class="col-12">
-              <app-chart [idChart]="'rxjs'" [dataSets]="chartDataSets" />
+              <app-chart [idChart]="'ngrx'" [dataSets]="chartDataSets" />
             </div>
           }
         </div>

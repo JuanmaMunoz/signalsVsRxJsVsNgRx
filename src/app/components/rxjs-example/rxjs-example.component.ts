@@ -7,8 +7,8 @@ import { IDataset, IExample, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
 import { PlayersService } from '../../services/players.service';
 import { ChartComponent } from '../chart/chart.component';
-import { CodeComponent } from '../code/code.component';
 import { ErrorComponent } from '../error/error.component';
+import { ExampleCodeComponent } from '../example-code/example-code.component';
 import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
@@ -16,7 +16,15 @@ import { PlayerComponent } from '../player/player.component';
 @Component({
   selector: 'app-rxjs-example',
   standalone: true,
-  imports: [PlayerComponent, ChartComponent, CommonModule, ExecutionComponent, ErrorComponent, ExampleIntroductionComponent, CodeComponent],
+  imports: [
+    PlayerComponent,
+    ChartComponent,
+    CommonModule,
+    ExecutionComponent,
+    ErrorComponent,
+    ExampleIntroductionComponent,
+    ExampleCodeComponent,
+  ],
   templateUrl: './rxjs-example.component.html',
   styleUrl: './rxjs-example.component.scss',
 })

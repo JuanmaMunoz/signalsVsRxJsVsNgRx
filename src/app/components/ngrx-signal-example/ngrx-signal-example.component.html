@@ -1,21 +1,21 @@
-<div class="signals-example">
+<div class="ngrx-signal-example">
   <app-example-introduction [example]="example" />
   <app-example-code [example]="example" />
-  <div class="signals-example__result">
-    <app-execution [time]="totalTime" [loading]="loading()" (actionGetPlayers)="click()" />
+  <div class="ngrx-signal-example__result">
+    <app-execution [time]="totalTime" [loading]="loading()" (actionGetPlayers)="getPlayers()" />
     @if (!loading()) {
       @if (error()) {
         <app-error [error]="error()"></app-error>
       } @else {
         <div class="row">
           @for (player of players(); track $index) {
-            <div class="col-4 text-center">
+            <div class="col-md-4 text-center">
               <app-player [player]="player" />
             </div>
           }
           @if (chartDataSets.length) {
             <div class="col-12">
-              <app-chart [idChart]="'signals'" [dataSets]="chartDataSets" />
+              <app-chart [idChart]="'ngrxSignal'" [dataSets]="chartDataSets" />
             </div>
           }
         </div>

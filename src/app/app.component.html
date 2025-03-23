@@ -18,6 +18,11 @@
       <app-code [code]="serviceCode" [title]="'Service'" />
       <app-signals-example />
       <app-rxjs-example />
+      @if (utilsService.isNgRxSignals) {
+        <app-ngrx-signal-example />
+      } @else {
+        <app-ngrx-example />
+      }
     </div>
   </div>
 </div>

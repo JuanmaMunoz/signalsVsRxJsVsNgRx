@@ -4,11 +4,14 @@ import { Subscription } from 'rxjs';
 import { CodeComponent } from './components/code/code.component';
 import { HeaderComponent } from './components/header/header.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
+import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.component';
+import { NgrxSignalExampleComponent } from './components/ngrx-signal-example/ngrx-signal-example.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { SignalsExampleComponent } from './components/signals-example/signals-example.component';
 import { TableComponent } from './components/table/table.component';
 import { serviceCode } from './info/info';
 import { Language } from './models/enums';
+import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +24,8 @@ import { Language } from './models/enums';
     TranslateModule,
     CodeComponent,
     RxjsExampleComponent,
+    NgrxExampleComponent,
+    NgrxSignalExampleComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -28,7 +33,10 @@ import { Language } from './models/enums';
 export class AppComponent implements OnInit {
   private subscription = new Subscription();
   public serviceCode: string = serviceCode;
-  constructor(private translate: TranslateService) {}
+  constructor(
+    private translate: TranslateService,
+    public utilsService: UtilsService,
+  ) {}
 
   ngOnInit(): void {
     const lang = localStorage.getItem('language') || Language.ENGLISH;

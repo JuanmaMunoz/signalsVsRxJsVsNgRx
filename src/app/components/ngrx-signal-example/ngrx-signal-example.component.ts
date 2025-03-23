@@ -4,23 +4,35 @@ import { AfterViewChecked, Component, effect, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { Store } from '@ngrx/store';
-import { IDataset, IPlayer } from '../../models/interfaces';
+import { examples } from '../../info/info';
+import { IDataset, IExample, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
 import { loadPlayers } from '../../store/players.actions';
 import { PlayerState } from '../../store/players.reducers';
 import { ChartComponent } from '../chart/chart.component';
 import { ErrorComponent } from '../error/error.component';
+import { ExampleCodeComponent } from '../example-code/example-code.component';
+import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
-
+declare var Prism: any;
 @Component({
-  selector: 'app-ngrx-signal-result',
+  selector: 'app-ngrx-signal-example',
   standalone: true,
-  imports: [PlayerComponent, ChartComponent, CommonModule, ExecutionComponent, ErrorComponent, ErrorComponent],
-  templateUrl: './ngrx-signal-result.component.html',
-  styleUrl: './ngrx-signal-result.component.scss',
+  imports: [
+    PlayerComponent,
+    ChartComponent,
+    CommonModule,
+    ExecutionComponent,
+    ErrorComponent,
+    ErrorComponent,
+    ExampleIntroductionComponent,
+    ExampleCodeComponent,
+  ],
+  templateUrl: './ngrx-signal-example.component.html',
+  styleUrl: './ngrx-signal-example.component.scss',
 })
-export class NgrxResultSignalComponent implements AfterViewChecked {
+export class NgrxSignalExampleComponent implements AfterViewChecked {
   public chartDataSets: IDataset[] = [];
   public players!: Signal<IPlayer[]>;
   public loading!: Signal<boolean>;
@@ -28,7 +40,7 @@ export class NgrxResultSignalComponent implements AfterViewChecked {
   public startTime!: DOMHighResTimeStamp;
   public totalTime: string = '0';
   public startRendering: boolean = false;
-
+  public example: IExample = examples.find((e: IExample) => e.title === 'ngrxSignal')!;
   constructor(
     private store: Store<{ players: PlayerState }>,
     private chartService: ChartService,
@@ -62,6 +74,10 @@ export class NgrxResultSignalComponent implements AfterViewChecked {
         this.totalTime = time;
       }, 0);
     }
+  }
+
+  ngAfterViewInit(): void {
+    Prism.highlightAll();
   }
 
   public getPlayers(): void {
