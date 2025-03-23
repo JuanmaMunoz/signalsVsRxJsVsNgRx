@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
 import { IPlayer } from './../models/interfaces';
-import { loadPlayers, loadPlayersFailure, loadPlayersSuccess } from './players.actions';
+import { loadPlayers, loadPlayersFailure, loadPlayersSuccess, setInitialState } from './players.actions';
 
 export interface PlayerState {
   players: IPlayer[];
@@ -29,4 +29,5 @@ export const playerReducer = createReducer(
     loading: false,
     error,
   })),
+  on(setInitialState, () => initialState),
 );
