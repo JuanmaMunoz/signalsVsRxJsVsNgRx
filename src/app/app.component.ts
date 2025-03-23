@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { ExamplesComponent } from './components/examples/examples.component';
+import { CodeComponent } from './components/code/code.component';
 import { HeaderComponent } from './components/header/header.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
+import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
+import { SignalsExampleComponent } from './components/signals-example/signals-example.component';
 import { TableComponent } from './components/table/table.component';
+import { serviceCode } from './info/info';
 import { Language } from './models/enums';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     HeaderComponent,
     IntroductionComponent,
     TableComponent,
-    ExamplesComponent,
+    SignalsExampleComponent,
+    TranslateModule,
+    CodeComponent,
+    RxjsExampleComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   private subscription = new Subscription();
+  public serviceCode: string = serviceCode;
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
@@ -31,7 +36,7 @@ export class AppComponent implements OnInit {
     this.subscription.add(
       this.translate.onLangChange.subscribe((data) => {
         localStorage.setItem('language', data.lang);
-      })
+      }),
     );
   }
 

@@ -1,4 +1,4 @@
-<div class="example border-primary border-bottom py-5">
+<div class="example-introduction">
   <div class="d-inline-flex align-items-center">
     <h3 class="text-secondary">{{ 'examples.' + example.title + '.title' | translate }}</h3>
     @if (example.title === 'ngrx' || example.title === 'ngrxSignal') {
@@ -16,20 +16,4 @@
     }
   </div>
   <div class="text-secondary" [innerHTML]="'examples.' + example.title + '.description' | translate"></div>
-  <div class="row">
-    @if (example.configCode) {
-      <div class="col-xl-12">
-        <app-code [code]="example.configCode" [title]="'Service'" />
-      </div>
-    }
-    <div class="col-xl-6">
-      <app-code [code]="example.componentCode" [title]="'Component'" />
-    </div>
-    <div class="col-xl-6">
-      <app-code [code]="example.htmlCode" [title]="'Html'" />
-    </div>
-    <div class="col-xl-8 offset-xl-2">
-      <ng-content></ng-content>
-    </div>
-  </div>
 </div>

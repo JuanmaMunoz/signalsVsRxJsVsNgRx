@@ -10,7 +10,14 @@
       <app-table />
     </div>
     <div class="app__examples mt-4 mt-sm-5">
-      <app-examples />
+      <h2 class="text-primary">{{ 'examples.title' | translate }}</h2>
+      <div [innerHTML]="'examples.description' | translate" class="text-secondary"></div>
+      <div class="alert alert-info" role="alert">
+        {{ 'examples.alert' | translate }}
+      </div>
+      <app-code [code]="serviceCode" [title]="'Service'" />
+      <app-signals-example />
+      <app-rxjs-example />
     </div>
   </div>
 </div>

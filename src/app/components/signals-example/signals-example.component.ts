@@ -1,22 +1,25 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { finalize } from 'rxjs';
-import { IDataset, IPlayer } from '../../models/interfaces';
+import { examples } from '../../info/info';
+import { IDataset, IExample, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
 import { PlayersService } from '../../services/players.service';
 import { ChartComponent } from '../chart/chart.component';
+import { CodeComponent } from '../code/code.component';
 import { ErrorComponent } from '../error/error.component';
+import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
 
 @Component({
-  selector: 'app-signals-result',
+  selector: 'app-signals-example',
   standalone: true,
-  imports: [PlayerComponent, ChartComponent, ExecutionComponent, ErrorComponent],
-  templateUrl: './signals-result.component.html',
-  styleUrl: './signals-result.component.scss',
+  imports: [PlayerComponent, ChartComponent, ExecutionComponent, ErrorComponent, ExampleIntroductionComponent, CodeComponent],
+  templateUrl: './signals-example.component.html',
+  styleUrl: './signals-example.component.scss',
 })
-export class SignalsResultComponent {
+export class SignalsExampleComponent implements OnInit {
   public players = signal<IPlayer[]>([]);
   public loading = signal<boolean>(false);
   public error = signal<HttpErrorResponse | null>(null);
@@ -24,6 +27,7 @@ export class SignalsResultComponent {
   public startTime!: DOMHighResTimeStamp;
   public totalTime: string = '0';
   public startRendering: boolean = false;
+  public example: IExample = examples.find((e: IExample) => e.title === 'signal')!;
   constructor(
     public playersService: PlayersService,
     private chartService: ChartService,
@@ -35,6 +39,8 @@ export class SignalsResultComponent {
       }
     });
   }
+
+  ngOnInit(): void {}
 
   public click(): void {
     this.startTime = performance.now();

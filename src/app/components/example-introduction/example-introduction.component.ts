@@ -2,16 +2,15 @@ import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IExample } from '../../models/interfaces';
 import { UtilsService } from '../../services/utils.service';
-import { CodeComponent } from '../code/code.component';
 
 @Component({
-  selector: 'app-example',
+  selector: 'app-example-introduction',
   standalone: true,
-  imports: [CodeComponent, TranslateModule],
-  templateUrl: './example.component.html',
-  styleUrl: './example.component.scss',
+  imports: [TranslateModule],
+  templateUrl: './example-introduction.component.html',
+  styleUrl: './example-introduction.component.scss',
 })
-export class ExampleComponent {
+export class ExampleIntroductionComponent {
   @Input() example!: IExample;
   constructor(public utilsService: UtilsService) {}
 

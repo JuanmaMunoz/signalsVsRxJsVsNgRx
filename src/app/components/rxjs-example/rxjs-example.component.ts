@@ -2,23 +2,25 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, finalize, Subscription } from 'rxjs';
-import { IDataset, IPlayer } from '../../models/interfaces';
+import { examples } from '../../info/info';
+import { IDataset, IExample, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
 import { PlayersService } from '../../services/players.service';
 import { ChartComponent } from '../chart/chart.component';
+import { CodeComponent } from '../code/code.component';
 import { ErrorComponent } from '../error/error.component';
+import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
-import { SpinnerComponent } from '../spinner/spinner.component';
-import { PlayerComponent } from './../player/player.component';
+import { PlayerComponent } from '../player/player.component';
 
 @Component({
-  selector: 'app-rxjs-result',
+  selector: 'app-rxjs-example',
   standalone: true,
-  imports: [PlayerComponent, ChartComponent, CommonModule, ExecutionComponent, SpinnerComponent, ErrorComponent],
-  templateUrl: './rxjs-result.component.html',
-  styleUrl: './rxjs-result.component.scss',
+  imports: [PlayerComponent, ChartComponent, CommonModule, ExecutionComponent, ErrorComponent, ExampleIntroductionComponent, CodeComponent],
+  templateUrl: './rxjs-example.component.html',
+  styleUrl: './rxjs-example.component.scss',
 })
-export class RxjsResultComponent implements OnInit, OnDestroy {
+export class RxjsExampleComponent implements OnInit, OnDestroy {
   public chartDataSets: IDataset[] = [];
   public players$: BehaviorSubject<IPlayer[]> = new BehaviorSubject([] as IPlayer[]);
   public error$: BehaviorSubject<HttpErrorResponse | null> = new BehaviorSubject<HttpErrorResponse | null>(null);
@@ -27,7 +29,7 @@ export class RxjsResultComponent implements OnInit, OnDestroy {
   public totalTime: string = '0';
   public startRendering: boolean = false;
   private subscription = new Subscription();
-
+  public example: IExample = examples.find((e: IExample) => e.title === 'rxjs')!;
   constructor(
     public playersService: PlayersService,
     private chartService: ChartService,

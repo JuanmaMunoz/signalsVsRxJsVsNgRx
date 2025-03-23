@@ -15,7 +15,7 @@ export const serviceCode: string = `export class PlayersService {
 export const examples: IExample[] = [
   {
     title: 'signal',
-    componentCode: `export class SignalsResultComponent {
+    componentCode: `export class SignalsExampleComponent {
   public players = signal<IPlayer[]>([]);
   public loading = signal<boolean>(false);
   public error = signal<HttpErrorResponse | null>(null);
@@ -43,7 +43,7 @@ export const examples: IExample[] = [
       });
   }
 }`,
-    htmlCode: `<div class="signals-result">
+    htmlCode: `<div class="signals-example">
   <app-execution [loading]="loading()" (actionGetPlayers)="click()" />
   @if (!loading()) {
     @if (error()) {
@@ -67,7 +67,7 @@ export const examples: IExample[] = [
   },
   {
     title: 'rxjs',
-    componentCode: `export class RxjsResultComponent implements OnInit, OnDestroy {
+    componentCode: `export class RxjsExampleComponent implements OnInit, OnDestroy {
   public chartDataSets: IDataset[] = [];
   public players$: BehaviorSubject<IPlayer[]> = new BehaviorSubject([] as IPlayer[]);
   public error$: BehaviorSubject<HttpErrorResponse | null> = new BehaviorSubject<HttpErrorResponse | null>(null);
@@ -105,7 +105,7 @@ export const examples: IExample[] = [
   }
 }
 `,
-    htmlCode: `<div class="rxjs-result">
+    htmlCode: `<div class="rxjs-example">
   <app-execution [loading]="loading$ | async" (actionGetPlayers)="click()" />
   @if (!(loading$ | async)) {
     @if (error$ | async) {

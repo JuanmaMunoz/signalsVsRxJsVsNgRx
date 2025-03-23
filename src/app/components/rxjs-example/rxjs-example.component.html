@@ -1,0 +1,32 @@
+<div class="rxjs-example">
+  <app-example-introduction [example]="example" />
+  <div class="signals-example__code row">
+    <div class="col-xl-6">
+      <app-code [code]="example.componentCode" [title]="'Component'" />
+    </div>
+    <div class="col-xl-6">
+      <app-code [code]="example.htmlCode" [title]="'Html'" />
+    </div>
+  </div>
+  <div class="rxjs-example__result">
+    <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="click()" />
+    @if (!(loading$ | async)) {
+      @if (error$ | async) {
+        <app-error [error]="error$ | async"></app-error>
+      } @else {
+        <div class="row">
+          @for (player of players$ | async; track $index) {
+            <div class="col-md-4 text-center">
+              <app-player [player]="player" />
+            </div>
+          }
+          @if (chartDataSets.length) {
+            <div class="col-12">
+              <app-chart [idChart]="'rxjs'" [dataSets]="chartDataSets" />
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</div>
