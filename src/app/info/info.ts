@@ -5,9 +5,9 @@ export const serviceCode: string = `export class PlayersService {
 
   constructor(private http: HttpClient) {}
       
-  public getPlayers(): void {
-      const url = 'assets/data/players.json';
-      this.http.get<IPlayer[]>(url).subscribe((data: IPlayer[]) => this.players.set(data));
+  public getPlayers(): Observable<IPlayer[]> {
+    const url = 'assets/data/players.json';
+    return this.http.get<IPlayer[]>(url).pipe(delay(250));
   }
 }
 `;

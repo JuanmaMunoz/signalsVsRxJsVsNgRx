@@ -1,4 +1,6 @@
 {
+  "english": "English",
+  "spanish": "Spanish",
   "introduction": {
     "title": "Which technology to choose for managing my application's state?",
     "description": "<p>The <strong>architecture of a Frontend system</strong> should be aligned with the <strong>specific needs of the business and product</strong>, rather than being based solely on <strong>trends or popular technologies</strong> without evaluating their advantages and disadvantages.</p><p>However, many job listings for the <strong>Frontend Developer</strong> role ask for experience with <strong>specific technologies</strong> without considering that <strong>each project presents its own challenges and objectives</strong>. The choice of <strong>appropriate tools and architectures</strong> should be based on key factors such as:</p>",
@@ -97,8 +99,12 @@
       "description": "<p>Through the function <strong>getPlayers()</strong>, we dispatch the <strong>loadPlayers()</strong> action, which is intercepted by the <strong>loadPlayers$</strong> effect responsible for retrieving the football players' data.</p><p>In the <strong>constructor</strong> of our component, we link the <strong>observables</strong> with the various <strong>states</strong> of our <strong>store</strong>, and in the <strong>ngOnInit()</strong> hook, we subscribe to changes in the <strong>players$</strong> observable. This way, once it contains the necessary information, the <strong>createDataSets()</strong> method from the <strong>ChartService</strong> is executed, providing the data needed for the chart.</p><p>The <strong>players$</strong> observable, being a long-lived observable, requires unsubscribing in the <strong>ngOnDestroy</strong> hook of our component.</p><p>Finally, in the <strong>template</strong>, we iterate over the <strong>players$</strong> observable with the <strong>async</strong> pipe to render the <strong>app-player</strong> components. We also pass the corresponding data to the <strong>app-chart</strong> component to generate the chart.</p>"
     },
     "ngrxSignal": {
-      "title": "NgRx with Signals",
+      "title": "NgRx",
       "description": "<p>Through the function <strong>getPlayers()</strong>, we dispatch the <strong>loadPlayers()</strong> action, which is listened to by the <strong>loadPlayers$</strong> effect responsible for retrieving the football players' data.</p><p>In the <strong>constructor</strong> of our component, we link the <strong>signals</strong> with the various <strong>states</strong> of our <strong>store</strong> using the <strong>toSignal()</strong> function, which converts an <strong>observable</strong> into a <strong>signal</strong>. Also, in the constructor, we define an <strong>effect</strong> that listens for changes in the <strong>players</strong> signal, and once it contains the necessary information, the <strong>createDataSets()</strong> method from the <strong>ChartService</strong> is executed, providing the data needed for the chart.</p><p>Finally, in the <strong>template</strong>, we iterate over the <strong>players</strong> signal to render the <strong>app-player</strong> components. We also pass the corresponding data to the <strong>app-chart</strong> component to generate the chart.</p>"
     }
+  },
+  "conclusion": {
+    "title": "Conclusion",
+    "description": "<p>From my point of view, each of these technologies has its own strengths and weaknesses. We can see the simplicity of <strong>Signals</strong>, the versatility of <strong>Subjects</strong>, or the well-defined structure of <strong>NgRx</strong>. The most valuable thing is understanding how each one works, as we will likely need to use them either individually or combined depending on the case in our professional careers.</p><p>The purpose of this post is not to say which is <strong>'better'</strong>, but to offer a clear perspective so that each reader can draw their own conclusions from the comparisons.</p><p>There is no ideal option for all cases, so the perfect formula may lie in understanding each of the alternatives and knowing when to implement them.</p>"
   }
 }

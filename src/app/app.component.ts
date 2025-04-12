@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CodeComponent } from './components/code/code.component';
+import { ConclusionComponent } from './components/conclusion/conclusion.component';
 import { HeaderComponent } from './components/header/header.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.component';
@@ -26,6 +27,7 @@ import { UtilsService } from './services/utils.service';
     RxjsExampleComponent,
     NgrxExampleComponent,
     NgrxSignalExampleComponent,
+    ConclusionComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

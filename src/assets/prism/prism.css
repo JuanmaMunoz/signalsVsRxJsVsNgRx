@@ -3,7 +3,7 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
 code[class*='language-'],
 pre[class*='language-'] {
   background: 0 0;
-  color: #000;
+  color: var(--bs-secondary);
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: 1em;
   -webkit-hyphens: none;
@@ -96,11 +96,13 @@ pre[class*='language-'] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #07a;
+  /*color: #07a;*/
+  color: rgb(24, 168, 235);
 }
 .token.class-name,
 .token.function {
-  color: #dd4a68;
+  /*color: #dd4a68;*/
+  color: var(--bs-primary);
 }
 .token.important,
 .token.regex,
@@ -207,4 +209,10 @@ pre[class*='language-'].line-numbers > code {
   display: block;
   padding-right: 0.8em;
   text-align: right;
+}
+
+pre,
+code {
+  border: none !important;
+  outline: none !important;
 }

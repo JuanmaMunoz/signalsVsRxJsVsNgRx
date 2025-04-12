@@ -1,4 +1,6 @@
 {
+  "english": "Inglés",
+  "spanish": "Español",
   "introduction": {
     "title": "¿Qué tecnología elegir para la gestión de estados de mi aplicación?",
     "description": "<p>La <strong>arquitectura de un sistema Frontend</strong> debe estar alineada con las <strong>necesidades específicas del negocio y del producto</strong>, en lugar de basarse únicamente en <strong>tendencias o tecnologías populares</strong> sin evaluar sus ventajas e inconvenientes.</p><p>Sin embargo, muchas ofertas para el rol de <strong>Frontend Developer</strong> solicitan experiencia en <strong>tecnologías específicas</strong> sin considerar que <strong>cada proyecto presenta desafíos y objetivos particulares</strong>. La elección de <strong>herramientas y arquitecturas adecuadas</strong> debe fundamentarse en factores clave como:</p>",
@@ -100,5 +102,9 @@
       "title": "NgRx",
       "description": "<p>A través de la función <strong>getPlayers()</strong>, disparamos la acción <strong>loadPlayers()</strong>, la cual es escuchada por el efecto <strong>loadPlayers$</strong>, encargado de recuperar los datos de los futbolistas.</p><p>En el <strong>constructor</strong> de nuestro componente, relacionamos los <strong>signals</strong> con los distintos <strong>states</strong> de nuestro <strong>store</strong> mediante la función <strong>toSignal()</strong>, la cual transforma un <strong>observable</strong> en un <strong>signal</strong>. También en el constructor, definimos un <strong>effect</strong> que escucha los cambios del signal <strong>players</strong> y, una vez que contiene la información necesaria, se ejecuta el método <strong>createDataSets()</strong> del servicio <strong>ChartService</strong>, que nos proporciona los datos requeridos para la gráfica.</p><p>Finalmente, en el <strong>template</strong>, se itera el signal <strong>players</strong> para renderizar los componentes <strong>app-player</strong>. También se pasan los datos correspondientes al componente <strong>app-chart</strong> para generar la gráfica.</p>"
     }
+  },
+  "conclusion": {
+    "title": "Conclusión",
+    "description": "<p>Desde mi punto de vista, cada una de estas tecnologías tiene sus propias fortalezas y debilidades. Podemos ver la sencillez de los <strong>Signals</strong>, la versatilidad de los <strong>Subjects</strong> o la estructura bien definida de <strong>NgRx</strong>. Lo más valioso es entender cómo funciona cada una, ya que probablemente, en nuestra carrera profesional, debamos utilizarlas de forma individual o combinada según el caso.</p><p>La idea de este post no es decir cuál es <strong>'mejor'</strong>, sino ofrecer una perspectiva clara para que cada lector pueda sacar sus propias conclusiones a partir de las comparativas.</p><p>No hay una opción idónea para todos los casos, por lo que posiblemente la fórmula perfecta esté en el conocimiento de cada una de las alternativas y saber cuándo implementarlas.</p>"
   }
 }

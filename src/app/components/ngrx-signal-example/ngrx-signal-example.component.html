@@ -1,4 +1,4 @@
-<div class="ngrx-signal-example">
+<div class="ngrx-signal-example mt-5 border-bottom border-primary pb-5">
   <app-example-introduction [example]="example" />
   <app-example-code [example]="example" />
   <div class="ngrx-signal-example__result">
@@ -9,12 +9,12 @@
       } @else {
         <div class="row">
           @for (player of players(); track $index) {
-            <div class="col-md-4 text-center">
+            <div class="col-4 text-center">
               <app-player [player]="player" />
             </div>
           }
           @if (chartDataSets.length) {
-            <div class="col-12">
+            <div class="col-12 col-lg-6 offset-lg-3">
               <app-chart [idChart]="'ngrxSignal'" [dataSets]="chartDataSets" />
             </div>
           }
