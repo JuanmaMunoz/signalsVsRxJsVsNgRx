@@ -1,8 +1,6 @@
 import { IExample } from '../models/interfaces';
 
 export const serviceCode: string = `export class PlayersService {
-  public players = signal<IPlayer[]>([]);
-
   constructor(private http: HttpClient) {}
       
   public getPlayers(): Observable<IPlayer[]> {

@@ -1,5 +1,5 @@
 .header {
-  background: url('/assets/images/clouds.png') no-repeat center center;
+  background: url('/assets/images/clouds_new.png') no-repeat center center;
   background-size: cover;
   padding: 5rem 2rem 3rem 2rem;
   &__language {
@@ -17,6 +17,7 @@
   }
   &__logo {
     animation: showLogo 0.5s;
+    width: 20rem;
   }
   h1 {
     font-size: 5rem;
