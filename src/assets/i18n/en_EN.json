@@ -26,10 +26,10 @@
         "description": "Is the team mostly <strong>Full-Stack</strong> with basic <strong>Frontend</strong> knowledge, requiring an <strong>easy-to-maintain architecture</strong>, or is it a team specialized in <strong>Frontend</strong> that can implement a <strong>more advanced solution</strong>?"
       }
     },
-    "conclusion": "<p>The lack of a <strong>prior analysis</strong> can lead to inefficient solutions in terms of <strong>performance</strong>, <strong>flexibility</strong>, and <strong>ease of development</strong>.</p><p>In Frontend development with <strong>Angular</strong>, one of the most critical aspects is <strong>state management</strong> and handling <strong>reactive data flows</strong> between components. Depending on the <strong>complexity of the application</strong> and its <strong>scalability</strong> needs, the <strong>tools and approaches for state management</strong> can vary significantly.</p><p>Three of the most commonly used solutions for these challenges are <strong>RxJS Subjects</strong>, <strong>Angular Signals</strong>, and <strong>NgRx</strong>. Each one offers <strong>features</strong>, <strong>advantages</strong>, and <strong>disadvantages</strong> that depend on the <strong>context</strong> and <strong>specific project requirements</strong>.</p>"
+    "conclusion": "<p>The lack of a <strong>prior analysis</strong> can lead to inefficient solutions in terms of <strong>performance</strong>, <strong>flexibility</strong>, and <strong>ease of development</strong>.</p><p>In Frontend development with <strong>Angular</strong>, one of the most critical aspects is <strong>state management</strong> and handling <strong>reactive data flows</strong> between components. Depending on the <strong>complexity of the application</strong> and its <strong>scalability</strong> needs, the <strong>tools and approaches for state management</strong> can vary significantly.</p><p>Three of the most commonly used solutions for these challenges are <strong>Angular Signals</strong>, <strong>RxJS Subjects</strong>, and <strong>NgRx</strong>. Each one offers <strong>features</strong>, <strong>advantages</strong>, and <strong>disadvantages</strong> that depend on the <strong>context</strong> and <strong>specific project requirements</strong>.</p>"
   },
   "table": {
-    "title": "Angular Signals <span class='text-secondary'>vs</span> RxJs Subjects <span class='text-secondary'>vs</span> NgRx Comparison",
+    "title": "Angular Signals <span class='text-secondary'>vs</span> RxJS Subjects <span class='text-secondary'>vs</span> NgRx Comparison",
     "description": "From my perspective and based on my <strong>experience</strong>, I have created this table comparing the <strong>advantages</strong> and <strong>disadvantages</strong> of these three tools for <strong>state management</strong> in an application. To do this, I have considered factors such as <strong>complexity</strong>, <strong>performance</strong>, <strong>application types</strong>, etc. It is important to note that this is my <strong>personal opinion</strong> and each reader may have their own <strong>point of view</strong>.",
     "paradigm": {
       "title": "Paradigm",
@@ -48,6 +48,12 @@
       "signals": "<span class='text-success'>High (recalculated only when the signal changes)</span>",
       "rxjs": "<span class='text-success'>High (manual flow management)</span>",
       "ngrx": "<span class='text-warning'>Can be less efficient due to the use of reducers and immutable state</span>"
+    },
+    "developmentTime": {
+      "title": "Development Time",
+      "signals": "<span class='text-success'>Very Low</span>",
+      "rxjs": "<span class='text-success'>Low</span>",
+      "ngrx": "<span class='text-danger'>High</span>"
     },
     "strategyChange": {
       "title": "Change strategy",
@@ -81,6 +87,7 @@
     }
   },
   "examples": {
+    "service": "We will use an <strong>HttpClient</strong> service to fetch data from a <strong>JSON</strong> file. This service has a simulated delay of <strong>250 ms</strong>, which is subtracted from the total rendering time. This service is shared across all examples.",
     "title": "Code Comparison",
     "result": "Live Example",
     "performance": "Rendering Time",

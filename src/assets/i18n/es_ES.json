@@ -26,10 +26,10 @@
         "description": "¿El equipo es mayormente <strong>Full-Stack</strong> con conocimientos básicos de <strong>Frontend</strong>, lo que requiere una <strong>arquitectura fácil de mantener</strong>, o se trata de un equipo especializado en <strong>Frontend</strong> que puede implementar una <strong>solución más avanzada</strong>?"
       }
     },
-    "conclusion": "<p>La falta de un <strong>análisis previo</strong> puede llevar a soluciones poco eficientes en términos de <strong>rendimiento</strong>, <strong>flexibilidad</strong> y <strong>facilidad de desarrollo</strong>.</p><p>En el desarrollo de aplicaciones <strong>Frontend</strong> con <strong>Angular</strong>, uno de los aspectos más críticos es la <strong>gestión del estado</strong> y el manejo de los <strong>flujos reactivos de datos</strong> entre componentes. Dependiendo de la <strong>complejidad de la aplicación</strong> y sus necesidades de <strong>escalabilidad</strong>, las <strong>herramientas y enfoques para gestionar el estado</strong> pueden variar considerablemente.</p><p>Tres de las soluciones más utilizadas para estos desafíos son <strong>RxJS Subjects</strong>, <strong>Angular Signals</strong> y <strong>NgRx</strong>. Cada una ofrece <strong>características</strong>, <strong>ventajas</strong> y <strong>desventajas</strong> particulares, por lo que su idoneidad depende del <strong>contexto</strong> y los <strong>requisitos específicos del proyecto</strong>.</p>"
+    "conclusion": "<p>La falta de un <strong>análisis previo</strong> puede llevar a soluciones poco eficientes en términos de <strong>rendimiento</strong>, <strong>flexibilidad</strong> y <strong>facilidad de desarrollo</strong>.</p><p>En el desarrollo de aplicaciones <strong>Frontend</strong> con <strong>Angular</strong>, uno de los aspectos más críticos es la <strong>gestión del estado</strong> y el manejo de los <strong>flujos reactivos de datos</strong> entre componentes. Dependiendo de la <strong>complejidad de la aplicación</strong> y sus necesidades de <strong>escalabilidad</strong>, las <strong>herramientas y enfoques para gestionar el estado</strong> pueden variar considerablemente.</p><p>Tres de las soluciones más utilizadas para estos desafíos son <strong>Angular Signals</strong>, <strong>RxJS Subjects</strong>, y <strong>NgRx</strong>. Cada una ofrece <strong>características</strong>, <strong>ventajas</strong> y <strong>desventajas</strong> particulares, por lo que su idoneidad depende del <strong>contexto</strong> y los <strong>requisitos específicos del proyecto</strong>.</p>"
   },
   "table": {
-    "title": "Comparativa Angular Signals <span class='text-secondary'>vs</span> RxJs Subjects <span class='text-secondary'>vs</span> NgRx",
+    "title": "Comparativa Angular Signals <span class='text-secondary'>vs</span> RxJS Subjects <span class='text-secondary'>vs</span> NgRx",
     "description": "Desde mi perspectiva y basándome en mi <strong>experiencia</strong>, he elaborado esta tabla que compara las <strong>ventajas</strong> y <strong>desventajas</strong> de estas tres herramientas para la <strong>gestión de estados</strong> en una aplicación. Para ello, he considerado factores como la <strong>complejidad</strong>, el <strong>rendimiento</strong>, los <strong>tipos de aplicaciones</strong>, etc. Cabe destacar que esta es mi <strong>opinión personal</strong> y cada lector podrá tener su propio <strong>punto de vista</strong>.",
     "paradigm": {
       "title": "Paradigma",
@@ -48,6 +48,12 @@
       "signals": "<span class='text-success'>Alto (recalculado solo cuando cambia la señal)</span>",
       "rxjs": "<span class='text-success'>Alto (gestión manual del flujo de datos)</span>",
       "ngrx": "<span class='text-warning'>Puede ser menos eficiente por el uso de reducers e immutable state</span>"
+    },
+    "developmentTime": {
+      "title": "Tiempo de desarrollo",
+      "signals": "<span class='text-success'>Muy Bajo</span>",
+      "rxjs": "<span class='text-success'>Bajo</span>",
+      "ngrx": "<span class='text-danger'>Alto</span>"
     },
     "strategyChange": {
       "title": "Estrategia de cambio",
@@ -81,6 +87,7 @@
     }
   },
   "examples": {
+    "service": "Utilizaremos un servicio <strong>HttpClient</strong> para obtener los datos desde un archivo <strong>JSON</strong>. Este servicio tiene un retraso simulado de <strong>250 ms</strong>, el cual se resta del tiempo total de renderizado. Este servicio es compartido por todos los ejemplos.",
     "title": "Comparativa de códigos",
     "result": "Ejemplo en directo",
     "performance": "Tiempo de renderizado",
@@ -91,7 +98,7 @@
       "description": "<p>A través de la función <strong>getPlayers()</strong>, se invoca al servicio encargado de recuperar los datos de los futbolistas. Durante la suscripción a este servicio, los datos obtenidos se almacenan en nuestro <strong>signal</strong> mediante el método <strong>set()</strong>.</p><p>Además, en el <strong>constructor</strong> del componente, se establece un <strong>effect</strong> que supervisa los cambios en el signal. De este modo, una vez que el signal <strong>players</strong> contiene la información necesaria, se ejecuta el método <strong>createDataSets()</strong> del servicio <strong>ChartService</strong>, el cual nos proporciona los datos requeridos para la gráfica.</p><p>Finalmente, en el <strong>template</strong>, se itera el signal <strong>players</strong> para renderizar los componentes <strong>app-player</strong>. También pasamos los datos correspondientes al componente <strong>app-chart</strong> para generar la gráfica.</p>"
     },
     "rxjs": {
-      "title": "Subjects RxJS",
+      "title": "RxJS Subjects",
       "description": "<p>A través de la función <strong>getPlayers()</strong>, se invoca el servicio encargado de recuperar los datos de los futbolistas. Durante la suscripción a este servicio, dichos datos se almacenan en nuestro <strong>BehaviorSubject</strong> mediante el método <strong>next()</strong>.</p><p>Además, en el hook <strong>ngOnInit</strong> del componente nos subscribimos a los cambios de nuestro <strong>BehaviorSubject</strong>, de manera que, una vez el <strong>BehaviorSubject</strong> disponga de la información necesaria, se ejecute el método <strong>createChartData()</strong>.</p><p>En el hook <strong>ngOnDestroy</strong> desuscribimos nuestro <strong>BehaviorSubject</strong> al ser un observable de larga duración, para evitar fuga de memoria y comportamientos no deseados.</p><p>Finalmente, en el <strong>template</strong> se itera el <strong>BehaviorSubject</strong> mediante la pipe <strong>async</strong> para renderizar los componentes <strong>app-player</strong>, y se pasan los datos correspondientes al componente <strong>app-chart</strong> para generar la gráfica.</p>"
     },
     "ngrx": {

@@ -13,6 +13,7 @@
       <h2 class="text-primary">{{ 'examples.title' | translate }}</h2>
       <div [innerHTML]="'examples.description' | translate" class="text-secondary"></div>
       <div class="alert alert-info" role="alert" [innerHTML]="'examples.alert' | translate"></div>
+      <p class="text-secondary" [innerHTML]="'examples.service' | translate"></p>
       <app-code [code]="serviceCode" [title]="'Service'" />
       <app-signals-example />
       <app-rxjs-example />
