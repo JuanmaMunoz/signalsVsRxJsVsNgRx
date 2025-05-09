@@ -1,6 +1,6 @@
 <div class="execution mt-4">
   <div class="text-center">
-    <button [disabled]="loading" (click)="getPlayers()" class="btn btn-lg btn-outline-primary">
+    <button onclick="this.blur()" [disabled]="loading" (click)="getPlayers()" class="btn btn-lg btn-outline-primary">
       <h2>Get Players <i class="bi bi-hand-index-thumb"></i></h2>
       @if (loading) {
         <app-spinner />
