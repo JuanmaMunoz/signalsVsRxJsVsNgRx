@@ -109,3 +109,10 @@ td {
 .btn-outline-primary:hover {
   color: var(--bs-light) !important;
 }
+
+@media (max-width: 576px) {
+  .btn-outline-primary:hover {
+    background-color: var(--bs-light) !important;
+    color: var(--bs-primary) !important;
+  }
+}
