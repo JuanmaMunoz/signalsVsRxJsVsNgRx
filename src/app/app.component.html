@@ -1,13 +1,30 @@
-<div class="app">
+<div class="app bg-light">
   <div class="app__header">
     <app-header />
   </div>
-  <div class="app_body">
-    <div class="app__introduction mt-3">
+  <div class="app_body px-sm-5 px-3">
+    <div class="app__introduction mt-4 mt-sm-5">
       <app-introduction />
     </div>
-    <div class="app__table mt-3">
+    <div class="app__table mt-4 mt-sm-5">
       <app-table />
+    </div>
+    <div class="app__examples mt-4 mt-sm-5">
+      <h2 class="text-primary">{{ 'examples.title' | translate }}</h2>
+      <div [innerHTML]="'examples.description' | translate" class="text-secondary"></div>
+      <div class="alert alert-info" role="alert" [innerHTML]="'examples.alert' | translate"></div>
+      <p class="text-secondary" [innerHTML]="'examples.service' | translate"></p>
+      <app-code [code]="serviceCode" [title]="'Service'" />
+      <app-signals-example />
+      <app-rxjs-example />
+      @if (utilsService.isNgRxSignals) {
+        <app-ngrx-signal-example />
+      } @else {
+        <app-ngrx-example />
+      }
+    </div>
+    <div class="app__conclusion mt-4 mb-5">
+      <app-conclusion />
     </div>
   </div>
 </div>

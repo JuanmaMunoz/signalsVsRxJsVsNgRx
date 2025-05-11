@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rx-js-vs-ng-rx-js",
+            "outputPath": "docs",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -25,12 +25,12 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/assets/prism/prism.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/prism/prism.css"
             ],
-            "scripts": []
+            "scripts": ["src/assets/prism/prism.js"]
           },
           "configurations": {
             "production": {
