@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Language } from './../../models/enums';
 
-import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageComponent } from './language.component';
 
 describe('LanguageComponent', () => {
@@ -21,14 +21,15 @@ describe('LanguageComponent', () => {
 
     translateService = TestBed.inject(TranslateService);
 
-    translateService.setTranslation('en', {
+    translateService.setTranslation('en_EN', {
       english: 'English',
       spanish: 'Spanish',
     });
-    translateService.use('en');
+    translateService.use('en_EN');
     fixture = TestBed.createComponent(LanguageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    translateService.onLangChange.next({ lang: 'en_EN' } as LangChangeEvent);
   });
 
   it('should create', () => {
