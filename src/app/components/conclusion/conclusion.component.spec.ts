@@ -19,13 +19,13 @@ describe('ConclusionComponent', () => {
     fixture = TestBed.createComponent(ConclusionComponent);
     component = fixture.componentInstance;
     const translate = TestBed.inject(TranslateService);
-    translate.setTranslation('en', {
+    translate.setTranslation('en_En', {
       conclusion: {
         title: 'Conclusion Title',
         description: 'This is the conclusion description',
       },
     });
-    translate.use('en');
+    translate.use('en_En');
 
     fixture.detectChanges();
   });

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Language } from './../../models/enums';
 
-import { LangChangeEvent, TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageComponent } from './language.component';
 
 describe('LanguageComponent', () => {
@@ -11,12 +11,7 @@ describe('LanguageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        LanguageComponent,
-        TranslateModule.forRoot({
-          loader: { provide: TranslateLoader, useClass: TranslateFakeLoader },
-        }),
-      ],
+      imports: [LanguageComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     translateService = TestBed.inject(TranslateService);

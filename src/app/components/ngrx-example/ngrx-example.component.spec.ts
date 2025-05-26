@@ -112,4 +112,10 @@ describe('NgrxExampleComponent', () => {
     expect(playersComponent.length).toBe(3);
     expect(chartComponent).toBeTruthy();
   });
+
+  it('should unsubscribe on ngOnDestroy', () => {
+    const spy = spyOn<any>(component['subscription'], 'unsubscribe');
+    component.ngOnDestroy();
+    expect(spy).toHaveBeenCalled();
+  });
 });

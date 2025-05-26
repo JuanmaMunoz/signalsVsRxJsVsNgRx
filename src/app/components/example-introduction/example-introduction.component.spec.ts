@@ -31,7 +31,7 @@ describe('ExampleIntroductionComponent', () => {
       title: 'rxjs',
     };
     const translate = TestBed.inject(TranslateService);
-    translate.setTranslation('en', {
+    translate.setTranslation('en_En', {
       examples: {
         rxjs: {
           title: 'rxjs title',
@@ -43,7 +43,7 @@ describe('ExampleIntroductionComponent', () => {
         },
       },
     });
-    translate.use('en');
+    translate.use('en_En');
 
     utilsService = TestBed.inject(UtilsService) as jasmine.SpyObj<UtilsService>;
     store = TestBed.inject(MockStore);

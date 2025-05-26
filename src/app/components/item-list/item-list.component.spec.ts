@@ -20,7 +20,7 @@ describe('ItemListComponent', () => {
     fixture = TestBed.createComponent(ItemListComponent);
     component = fixture.componentInstance;
     const translate = TestBed.inject(TranslateService);
-    translate.setTranslation('en', {
+    translate.setTranslation('en_En', {
       examples: {
         rxjs: {
           title: 'rxjs title',
@@ -28,7 +28,7 @@ describe('ItemListComponent', () => {
         },
       },
     });
-    translate.use('en');
+    translate.use('en_En');
     fixture.detectChanges();
   });
 
