@@ -68,12 +68,8 @@ export class RxjsExampleComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public click(): void {
+  public getPlayers(): void {
     this.startTime = performance.now();
-    this.getPlayers();
-  }
-
-  private getPlayers(): void {
     this.loading$.next(true);
     this.playersService
       .getPlayers()

@@ -141,11 +141,7 @@ export const examples: IExample[] = [
     this.subscription.unsubscribe();
   }
 
-  public click(): void {
-    this.getPlayers();
-  }
-
-  private getPlayers(): void {
+  public getPlayers(): void {
     this.loading$.next(true);
     this.playersService
       .getPlayers()
@@ -158,7 +154,7 @@ export const examples: IExample[] = [
 }
 `,
     htmlCode: `<div class="rxjs-example">
-  <app-execution [loading]="loading$ | async" (actionGetPlayers)="click()" />
+  <app-execution [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
   @if (!(loading$ | async)) {
     @if (error$ | async) {
        <app-error [error]="error$ | async"></app-error>

@@ -11,7 +11,7 @@ export const mockPlayers: IPlayer[] = [
     dribbling: 6,
     shotPower: 7,
     color: 'red',
-    image: 'http:www.www.es/image.png',
+    image: '/image.png',
   },
   {
     name: 'Player 2',
@@ -23,7 +23,7 @@ export const mockPlayers: IPlayer[] = [
     dribbling: 6,
     shotPower: 7,
     color: 'blue',
-    image: 'http:www.www.es/image2.png',
+    image: '/image2.png',
   },
   {
     name: 'Player 3',
@@ -35,7 +35,7 @@ export const mockPlayers: IPlayer[] = [
     dribbling: 6,
     shotPower: 7,
     color: 'black',
-    image: 'http:www.www.es/image3.png',
+    image: '/image3.png',
   },
 ];
 
