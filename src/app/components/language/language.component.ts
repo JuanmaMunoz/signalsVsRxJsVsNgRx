@@ -21,11 +21,7 @@ export class LanguageComponent implements OnInit, OnDestroy {
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.translate.onLangChange.subscribe(
-        (data) => (this.language = data.lang as Language),
-      ),
-    );
+    this.subscription.add(this.translate.onLangChange.subscribe((data) => (this.language = data.lang as Language)));
   }
 
   ngOnDestroy(): void {

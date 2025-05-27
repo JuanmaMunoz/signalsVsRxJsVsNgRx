@@ -8,10 +8,9 @@ describe('SpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SpinnerComponent]
-    })
-    .compileComponents();
-    
+      imports: [SpinnerComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SpinnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +18,11 @@ describe('SpinnerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('shoult to exist class spinner-border', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const spinner = compiled.querySelector('.spinner-border');
+    expect(spinner).toBeTruthy();
   });
 });
