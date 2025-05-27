@@ -2,7 +2,7 @@
   <app-example-introduction [example]="example" />
   <app-example-code [example]="example" />
   <div class="rxjs-example__result">
-    <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="click()" />
+    <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
     @if (!(loading$ | async)) {
       @if (error$ | async) {
         <app-error [error]="error$ | async"></app-error>

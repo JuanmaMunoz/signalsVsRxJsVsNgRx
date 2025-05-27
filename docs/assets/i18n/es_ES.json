@@ -58,7 +58,7 @@
     "strategyChange": {
       "title": "Estrategia de cambio",
       "signals": "Mediante .set() y .update()",
-      "rxjs": "Mediante .next()</span>",
+      "rxjs": "Mediante .next()",
       "ngrx": "Basada en Redux (acciones, reducers y efectos)"
     },
     "unsubscribe": {
