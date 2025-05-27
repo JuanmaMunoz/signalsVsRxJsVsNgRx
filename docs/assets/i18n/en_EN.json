@@ -58,7 +58,7 @@
     "strategyChange": {
       "title": "Change strategy",
       "signals": "Via .set() and .update()",
-      "rxjs": "Via .next()</span>",
+      "rxjs": "Via .next()",
       "ngrx": "Based on Redux (actions, reducers, and effects)"
     },
     "unsubscribe": {

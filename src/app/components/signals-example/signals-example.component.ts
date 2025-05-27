@@ -42,12 +42,8 @@ export class SignalsExampleComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public click(): void {
+  public getPlayers(): void {
     this.startTime = performance.now();
-    this.getPlayers();
-  }
-
-  private getPlayers(): void {
     this.loading.set(true);
     this.playersService
       .getPlayers()
