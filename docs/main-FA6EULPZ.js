@@ -72,7 +72,7 @@ export const playerReducer = createReducer(
   public error = signal<HttpErrorResponse | null>(null);
   public chartDataSets: IDataset[] = [];
   
-  constructor(public playersService: PlayersService, private chartService: ChartService) {
+  constructor(private playersService: PlayersService, private chartService: ChartService) {
     effect(() => {
       if (this.players().length) 
         this.chartDataSets = this.chartService.createDataSets(this.players());
@@ -116,7 +116,7 @@ export const playerReducer = createReducer(
   public loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private subscription = new Subscription();
 
-  constructor(public playersService: PlayersService, private chartService: ChartService) {}
+  constructor(private playersService: PlayersService, private chartService: ChartService) {}
 
   ngOnInit(): void {
     this.subscription.add(

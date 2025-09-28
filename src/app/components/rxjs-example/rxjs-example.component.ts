@@ -39,7 +39,7 @@ export class RxjsExampleComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   public example: IExample = examples.find((e: IExample) => e.title === 'rxjs')!;
   constructor(
-    public playersService: PlayersService,
+    private playersService: PlayersService,
     private chartService: ChartService,
   ) {}
 

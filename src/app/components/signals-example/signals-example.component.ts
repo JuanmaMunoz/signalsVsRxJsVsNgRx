@@ -29,7 +29,7 @@ export class SignalsExampleComponent implements OnInit {
   public startRendering: boolean = false;
   public example: IExample = examples.find((e: IExample) => e.title === 'signal')!;
   constructor(
-    public playersService: PlayersService,
+    private playersService: PlayersService,
     private chartService: ChartService,
   ) {
     effect(() => {
