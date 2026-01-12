@@ -3,15 +3,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
-    selector: 'app-execution',
-    imports: [TranslateModule, SpinnerComponent],
-    templateUrl: './execution.component.html',
-    styleUrl: './execution.component.scss'
+  selector: 'app-execution',
+  imports: [TranslateModule, SpinnerComponent],
+  templateUrl: './execution.component.html',
+  styleUrl: './execution.component.scss',
 })
 export class ExecutionComponent {
-  @Input() time: string = '0';
-  @Input() loading: boolean | null = false;
-  @Output() actionGetPlayers: EventEmitter<null> = new EventEmitter();
+  @Input() time = '0';
+  @Input() loading = false;
+  @Output() actionGetPlayers = new EventEmitter<null>();
 
   public getPlayers(): void {
     this.actionGetPlayers.emit();

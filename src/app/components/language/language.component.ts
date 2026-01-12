@@ -1,23 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Language } from '../../models/enums';
 
 @Component({
-    selector: 'app-language',
-    imports: [CommonModule, FormsModule, TranslateModule],
-    templateUrl: './language.component.html',
-    styleUrls: ['./language.component.scss']
+  selector: 'app-language',
+  imports: [FormsModule, TranslateModule],
+  templateUrl: './language.component.html',
+  styleUrls: ['./language.component.scss'],
 })
 export class LanguageComponent implements OnInit, OnDestroy {
-  @Input() id: string = '';
+  @Input() id = '';
   public language: Language = Language.ENGLISH;
   public languageEnum = Language;
   private subscription = new Subscription();
-
-  constructor(private translate: TranslateService) {}
+  private translate = inject(TranslateService);
 
   ngOnInit(): void {
     this.subscription.add(this.translate.onLangChange.subscribe((data) => (this.language = data.lang as Language)));

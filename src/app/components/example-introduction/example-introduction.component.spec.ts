@@ -62,15 +62,15 @@ describe('ExampleIntroductionComponent', () => {
     expect(dispatchSpy).toHaveBeenCalledWith(setInitialState());
   });
 
-  it('should to have h3 with the text "rxjs title" and the description "rxjs description"', () => {
+  it('should to have h1 with the text "rxjs title" and the description "rxjs description"', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const h3 = compiled.querySelector('h3');
+    const h1 = compiled.querySelector('h1');
     const desc = compiled.querySelector('div.text-secondary');
-    expect(h3?.textContent).toContain('rxjs title');
+    expect(h1?.textContent).toContain('rxjs title');
     expect(desc?.textContent).toContain('rxjs description');
   });
 
-  it('should to have h3 with the text "ngrx title" , the description "ngrx description" and should to have one input', () => {
+  it('should to have h1 with the text "ngrx title" , the description "ngrx description" and should to have one input', () => {
     component.example = {
       componentCode: 'code ngrx',
       htmlCode: '<h1>ngrx</h1>',
@@ -78,10 +78,10 @@ describe('ExampleIntroductionComponent', () => {
     };
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const h3 = compiled.querySelector('h3');
+    const h1 = compiled.querySelector('h1');
     const desc = compiled.querySelector('div.text-secondary');
     const inputs = compiled.querySelectorAll('input');
-    expect(h3?.textContent).toContain('ngrx title');
+    expect(h1?.textContent).toContain('ngrx title');
     expect(desc?.textContent).toContain('ngrx description');
     expect(inputs.length).toBe(1);
   });

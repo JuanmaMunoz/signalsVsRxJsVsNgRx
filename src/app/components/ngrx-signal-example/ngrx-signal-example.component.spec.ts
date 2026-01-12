@@ -1,49 +1,44 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IPlayer } from './../../models/interfaces';
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { signal } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
 import { mockDatset, mockPlayers } from '../../info/into_tests';
 import { ChartService } from '../../services/chart.service';
 import { loadPlayers } from '../../store/players.actions';
+import { PlayerState } from '../../store/players.reducers';
 import { NgrxSignalExampleComponent } from './ngrx-signal-example.component';
 
 describe('NgrxSignalExampleComponent', () => {
   let component: NgrxSignalExampleComponent;
   let fixture: ComponentFixture<NgrxSignalExampleComponent>;
-  let storeSpy = jasmine.createSpyObj('Store', ['select', 'dispatch']);
+  let store: MockStore;
+  let dispatchSpy: jasmine.Spy;
+  const initialState: PlayerState = {
+    players: [],
+    loading: false,
+    error: null,
+  };
   let chartServiceSpy = jasmine.createSpyObj('ChartService', ['createDataSets']);
+  interface WindowWithPrism extends Window {
+    Prism: {
+      highlightAll: jasmine.Spy;
+    };
+  }
 
   beforeEach(async () => {
-    (window as any).Prism = {
+    (window as unknown as WindowWithPrism).Prism = {
       highlightAll: jasmine.createSpy('highlightAll'),
     };
 
-    storeSpy.select.and.callFake((selectorFn: any) => {
-      const fakeState = {
-        players: {
-          players: [],
-          loading: false,
-          error: null,
-        },
-      };
-      return of(selectorFn(fakeState));
-    });
-
     await TestBed.configureTestingModule({
       imports: [NgrxSignalExampleComponent, TranslateModule.forRoot()],
-      providers: [
-        { provide: Store, useValue: storeSpy },
-        { provide: ChartService, useValue: chartServiceSpy },
-      ],
+      providers: [provideMockStore({ initialState }), { provide: ChartService, useValue: chartServiceSpy }],
     }).compileComponents();
-
+    store = TestBed.inject(MockStore);
+    dispatchSpy = spyOn(store, 'dispatch');
     fixture = TestBed.createComponent(NgrxSignalExampleComponent);
     component = fixture.componentInstance;
-    storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store<any>>;
     chartServiceSpy = TestBed.inject(ChartService) as jasmine.SpyObj<ChartService>;
   });
 
@@ -61,12 +56,13 @@ describe('NgrxSignalExampleComponent', () => {
 
   it('should to show error component', () => {
     const error: HttpErrorResponse = { error: { code: 500, message: 'Error Server' } } as HttpErrorResponse;
-    component.players = signal<IPlayer[]>([]);
-    component.loading = signal<boolean>(false);
-    component.error = signal<HttpErrorResponse>(error);
-    component.getPlayers();
-
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(loadPlayers());
+    store.setState({
+      players: {
+        loading: false,
+        error,
+        players: [],
+      },
+    });
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const errorComponent = compiled.querySelector('app-error');
@@ -74,38 +70,38 @@ describe('NgrxSignalExampleComponent', () => {
   });
 
   it('should to be loading', () => {
-    component.players = signal<IPlayer[]>([]);
-    component.loading = signal<boolean>(true);
-    component.error = signal<null>(null);
-    component.getPlayers();
-
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(loadPlayers());
+    store.setState({
+      players: {
+        loading: true,
+        error: null,
+        players: [],
+      },
+    });
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const playersComponent = compiled.querySelectorAll('app-player');
-    const chartComponent = compiled.querySelector('app-chart');
-    expect(playersComponent.length).toBe(0);
-    expect(chartComponent).toBeFalsy();
+    expect(compiled.querySelectorAll('app-player').length).toBe(0);
+    expect(compiled.querySelector('app-chart')).toBeFalsy();
+  });
+
+  it('should call chatService and load players', () => {
+    chartServiceSpy.createDataSets.and.returnValue(mockDatset);
+    store.setState({
+      players: {
+        loading: false,
+        error: null,
+        players: mockPlayers,
+      },
+    });
+
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(chartServiceSpy.createDataSets).toHaveBeenCalled();
+    expect(compiled.querySelectorAll('app-player').length).toBe(3);
+    expect(compiled.querySelector('app-chart')).toBeTruthy();
   });
 
   it('should dispatch loadPlayers and load chartDataSets when getPlayers is called', () => {
-    component.players = signal<IPlayer[]>(mockPlayers);
-    component.loading = signal<boolean>(false);
-    component.error = signal<null>(null);
-
-    chartServiceSpy.createDataSets.and.returnValue(mockDatset);
-
     component.getPlayers();
-    fixture.detectChanges();
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(loadPlayers());
-    expect(chartServiceSpy.createDataSets).toHaveBeenCalledWith(mockPlayers);
-    expect(component.chartDataSets).toEqual(mockDatset);
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const playersComponent = compiled.querySelectorAll('app-player');
-    const chartComponent = compiled.querySelector('app-chart');
-    expect(playersComponent.length).toBe(3);
-    expect(chartComponent).toBeTruthy();
+    expect(dispatchSpy).toHaveBeenCalledWith(loadPlayers());
   });
 });

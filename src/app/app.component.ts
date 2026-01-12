@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CodeComponent } from './components/code/code.component';
@@ -15,29 +15,27 @@ import { Language } from './models/enums';
 import { UtilsService } from './services/utils.service';
 
 @Component({
-    selector: 'app-root',
-    imports: [
-        HeaderComponent,
-        IntroductionComponent,
-        TableComponent,
-        SignalsExampleComponent,
-        TranslateModule,
-        CodeComponent,
-        RxjsExampleComponent,
-        NgrxExampleComponent,
-        NgrxSignalExampleComponent,
-        ConclusionComponent,
-    ],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [
+    HeaderComponent,
+    IntroductionComponent,
+    TableComponent,
+    SignalsExampleComponent,
+    TranslateModule,
+    CodeComponent,
+    RxjsExampleComponent,
+    NgrxExampleComponent,
+    NgrxSignalExampleComponent,
+    ConclusionComponent,
+  ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   public serviceCode: string = serviceCode;
-  constructor(
-    private translate: TranslateService,
-    public utilsService: UtilsService,
-  ) {}
+  private translate = inject(TranslateService);
+  public utilsService = inject(UtilsService);
 
   ngOnInit(): void {
     const lang = localStorage.getItem('language') || Language.ENGLISH;

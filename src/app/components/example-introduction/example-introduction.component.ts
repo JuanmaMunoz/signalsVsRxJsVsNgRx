@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { IExample } from '../../models/interfaces';
@@ -7,17 +7,15 @@ import { setInitialState } from '../../store/players.actions';
 import { PlayerState } from '../../store/players.reducers';
 
 @Component({
-    selector: 'app-example-introduction',
-    imports: [TranslateModule],
-    templateUrl: './example-introduction.component.html',
-    styleUrl: './example-introduction.component.scss'
+  selector: 'app-example-introduction',
+  imports: [TranslateModule],
+  templateUrl: './example-introduction.component.html',
+  styleUrl: './example-introduction.component.scss',
 })
 export class ExampleIntroductionComponent {
   @Input() example!: IExample;
-  constructor(
-    public utilsService: UtilsService,
-    private store: Store<{ players: PlayerState }>,
-  ) {}
+  public utilsService = inject(UtilsService);
+  private store = inject(Store<{ players: PlayerState }>);
 
   public changeIsNgRxSignals(): void {
     this.utilsService.isNgRxSignals = !this.utilsService.isNgRxSignals;

@@ -1,8 +1,8 @@
 import { IExample } from '../models/interfaces';
 
-export const serviceCode: string = `export class PlayersService {
-  constructor(private http: HttpClient) {}
-      
+export const serviceCode = `export class PlayersService {
+  private http = inject(HttpClient);
+
   public getPlayers(): Observable<IPlayer[]> {
     const url = 'assets/data/players.json';
     return this.http.get<IPlayer[]>(url).pipe(delay(250));
@@ -10,7 +10,7 @@ export const serviceCode: string = `export class PlayersService {
 }
 `;
 
-export const actionsReducers: string = `//Actions
+export const actionsReducers = `//Actions
 export const loadPlayers = createAction('[Player] Load Players');
 export const loadPlayersSuccess = createAction('[Player] Load Players Success', props<{ players: IPlayer[] }>());
 export const loadPlayersFailure = createAction('[Player] Load Players Failure', props<{ error: HttpErrorResponse }>());
@@ -45,11 +45,9 @@ export const playerReducer = createReducer(
 );
 `;
 
-export const effects: string = `export class PlayerEffects {
-  constructor(
-    private actions$: Actions,
-    private playersService: PlayersService,
-  ) {}
+export const effects = `export class PlayerEffects {
+  private actions$ = inject(Actions);
+  private playersService = inject(PlayersService);
 
   loadPlayers$ = createEffect(() =>
     this.actions$.pipe(
@@ -68,17 +66,18 @@ export const examples: IExample[] = [
   {
     title: 'signal',
     componentCode: `export class SignalsExampleComponent {
+  public chartDataSets: IDataset[] = [];
   public players = signal<IPlayer[]>([]);
   public loading = signal<boolean>(false);
   public error = signal<HttpErrorResponse | null>(null);
-  public chartDataSets: IDataset[] = [];
-  
-  constructor(private playersService: PlayersService, private chartService: ChartService) {
-    effect(() => {
-      if (this.players().length) 
-        this.chartDataSets = this.chartService.createDataSets(this.players());
-    });
-  }
+  private playersService = inject(PlayersService);
+  private chartService = inject(ChartService);
+
+  private effect = effect(() => {
+    if (this.players().length) {
+      this.chartDataSets = this.chartService.createDataSets(this.players());
+    }
+  });
 
   public getPlayers(): void {
     this.loading.set(true);
@@ -115,27 +114,19 @@ export const examples: IExample[] = [
   },
   {
     title: 'rxjs',
-    componentCode: `export class RxjsExampleComponent implements OnInit, OnDestroy {
+    componentCode: `export class RxjsExampleComponent {
   public chartDataSets: IDataset[] = [];
-  public players$: BehaviorSubject<IPlayer[]> = new BehaviorSubject([] as IPlayer[]);
-  public error$: BehaviorSubject<HttpErrorResponse | null> = new BehaviorSubject<HttpErrorResponse | null>(null);
-  public loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  private subscription = new Subscription();
+  public players$ = new BehaviorSubject<IPlayer[]>([]);
+  public loading$ = new BehaviorSubject<boolean>(false);
+  public error$ = new BehaviorSubject<HttpErrorResponse | null>(null);
+  private playersService = inject(PlayersService);
+  private chartService = inject(ChartService);
 
-  constructor(private playersService: PlayersService, private chartService: ChartService) {}
-
-  ngOnInit(): void {
-    this.subscription.add(
-      this.players$.subscribe((players: IPlayer[]) => {
-        if (players.length) 
-          this.chartDataSets = this.chartService.createDataSets(players);
-      }),
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  private subscription = this.players$.pipe(takeUntilDestroyed()).subscribe((players: IPlayer[]) => {
+    if (players.length) {
+      this.chartDataSets = this.chartService.createDataSets(players);
+    }
+  });
 
   public getPlayers(): void {
     this.loading$.next(true);
@@ -151,9 +142,9 @@ export const examples: IExample[] = [
 `,
     htmlCode: `<div class="rxjs-example">
   <app-execution [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
-  @if (!(loading$ | async)) {
+  @if ((loading$ | async) === false) {
     @if (error$ | async) {
-       <app-error [error]="error$ | async"></app-error>
+        <app-error [error]="error$ | async"></app-error>
     } @else {
         <div class="row">
           @for (player of players$ | async; track $index) {
@@ -173,31 +164,19 @@ export const examples: IExample[] = [
   },
   {
     title: 'ngrx',
-    componentCode: `export class NgrxExampleComponent implements OnInit, OnDestroy, AfterViewChecked {
+    componentCode: `export class NgrxExampleComponent implements {
   public chartDataSets: IDataset[] = [];
-  public players$!: Observable<IPlayer[]>;
-  public loading$!: Observable<boolean>;
-  public error$!: Observable<string | null>;
-  private subscription = new Subscription();
+  public players$: Observable<IPlayer[]> = this.store.select((state) => state.players.players);
+  public loading$: Observable<boolean> = this.store.select((state) => state.players.loading);
+  public error$: Observable<HttpErrorResponse | null> = this.store.select((state) => state.players.error);
+  private store = inject(Store<{ players: PlayerState }>);
+  private chartService = inject(ChartService);
 
-  constructor(private store: Store<{ players: PlayerState }>,private chartService: ChartService) {
-    this.players$ = this.store.select((state) => state.players.players);
-    this.loading$ = this.store.select((state) => state.players.loading);
-    this.error$ = this.store.select((state) => state.players.error);
-  }
-
-  ngOnInit(): void {
-    this.subscription.add(
-      this.players$.subscribe((data: IPlayer[]) => {
-        if (data.length)
-          this.chartDataSets = this.chartService.createDataSets(data);
-      }),
-    );
-  }
-  
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  private subscription = this.players$.pipe(takeUntilDestroyed()).subscribe((data: IPlayer[]) => {
+    if (data.length) {
+      this.chartDataSets = this.chartService.createDataSets(data);
+    }
+  });
 
   public getPlayers(): void {
     this.store.dispatch(loadPlayers());
@@ -205,7 +184,7 @@ export const examples: IExample[] = [
 }`,
     htmlCode: `<div class="ngrx-example">
   <app-execution [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
-  @if (!(loading$ | async)) {
+  @if ((loading$ | async) === false) {
     @if (error$ | async) {
        <app-error [error]="error$ | async"></app-error>
     } @else {
@@ -227,56 +206,54 @@ export const examples: IExample[] = [
   },
   {
     title: 'ngrxSignal',
-    componentCode: `export class NgrxSignalExampleComponent implements AfterViewChecked {
-      public chartDataSets: IDataset[] = [];
-      public players!: Signal<IPlayer[]>;
-      public loading!: Signal<boolean>;
-      public error!: Signal<HttpErrorResponse | null>;
+    componentCode: `export class NgrxSignalExampleComponent {
+  public chartDataSets: IDataset[] = [];
+  public players: Signal<IPlayer[]> = toSignal(
+    this.store.select((state) => state.players.players),
+    { initialValue: [] },
+  );
+  public loading: Signal<boolean> = toSignal(
+    this.store.select((state) => state.players.loading),
+    { initialValue: false },
+  );
+  public error: Signal<HttpErrorResponse | null> = toSignal(
+    this.store.select((state) => state.players.error),
+    { initialValue: null },
+  );
+  private store = inject(Store<{ players: PlayerState }>);
+  private chartService = inject(ChartService);
 
-      constructor(private store: Store<{ players: PlayerState }>, private chartService: ChartService) {
-        this.players = toSignal(
-          this.store.select((state) => state.players.players),
-          { initialValue: [] },
-        );
-        this.loading = toSignal(
-          this.store.select((state) => state.players.loading),
-          { initialValue: false },
-        );
-        this.error = toSignal(
-          this.store.select((state) => state.players.error),
-          { initialValue: null },
-        );
-    
-        effect(() => {
-          if (this.players().length)
-            this.chartDataSets = this.chartService.createDataSets(this.players());
-        });
-      }
-    
-      public getPlayers(): void {
-        this.store.dispatch(loadPlayers());
-      }
-    }`,
-    htmlCode: `<div class="rxjs-signal-example">
-  <app-execution [time]="totalTime" [loading]="loading()" (actionGetPlayers)="getPlayers()" />
-    @if (!loading()) {
-      @if (error()) {
-        <app-error [error]="error()"></app-error>
-      } @else {
-        <div class="row">
-          @for (player of players(); track $index) {
-            <div class="col-md-4 text-center">
-              <app-player [player]="player" />
-            </div>
-          }
-          @if (chartDataSets.length) {
-            <div class="col-12">
-              <app-chart [idChart]="'ngrxSignal'" [dataSets]="chartDataSets" />
-            </div>
-          }
-        </div>
-      }
+  private effect = effect(() => {
+    if (this.players().length) {
+      this.chartDataSets = this.chartService.createDataSets(this.players());
+      this.startRendering = true;
     }
+  });
+
+  public getPlayers(): void {
+    this.store.dispatch(loadPlayers());
+  }
+}`,
+    htmlCode: `<div class="rxjs-signal-example">
+  <app-execution [loading]="loading()" (actionGetPlayers)="getPlayers()" />
+  @if (!loading()) {
+    @if (error()) {
+      <app-error [error]="error()"></app-error>
+    } @else {
+      <div class="row">
+        @for (player of players(); track $index) {
+          <div class="col-md-4 text-center">
+            <app-player [player]="player" />
+          </div>
+        }
+        @if (chartDataSets.length) {
+          <div class="col-12">
+            <app-chart [idChart]="'ngrxSignal'" [dataSets]="chartDataSets" />
+          </div>
+        }
+      </div>
+    }
+  }
 </div>`,
   },
 ];

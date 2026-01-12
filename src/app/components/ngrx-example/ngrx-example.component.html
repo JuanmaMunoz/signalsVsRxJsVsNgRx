@@ -2,8 +2,8 @@
   <app-example-introduction [example]="example" />
   <app-example-code [example]="example" />
   <div class="ngrx-example__result">
-    <app-execution [time]="totalTime" [loading]="loading$ | async" (actionGetPlayers)="getPlayers()" />
-    @if (!(loading$ | async)) {
+    <app-execution [time]="totalTime" [loading]="(loading$ | async)!" (actionGetPlayers)="getPlayers()" />
+    @if ((loading$ | async) === false) {
       @if (error$ | async) {
         <app-error [error]="error$ | async"></app-error>
       } @else {

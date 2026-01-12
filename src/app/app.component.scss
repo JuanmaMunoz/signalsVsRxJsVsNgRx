@@ -1,1 +1,16 @@
+.app {
+  background: linear-gradient(135deg, #f8f5f6 0%, #ffffff 100%);
+  &__body {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+}
 
+@media (max-width: 1200px) {
+  .app {
+    &__body {
+      margin-left: 0rem;
+      margin-right: 0rem;
+    }
+  }
+}
