@@ -15,22 +15,21 @@ import { Language } from './models/enums';
 import { UtilsService } from './services/utils.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    HeaderComponent,
-    IntroductionComponent,
-    TableComponent,
-    SignalsExampleComponent,
-    TranslateModule,
-    CodeComponent,
-    RxjsExampleComponent,
-    NgrxExampleComponent,
-    NgrxSignalExampleComponent,
-    ConclusionComponent,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [
+        HeaderComponent,
+        IntroductionComponent,
+        TableComponent,
+        SignalsExampleComponent,
+        TranslateModule,
+        CodeComponent,
+        RxjsExampleComponent,
+        NgrxExampleComponent,
+        NgrxSignalExampleComponent,
+        ConclusionComponent,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   private subscription = new Subscription();

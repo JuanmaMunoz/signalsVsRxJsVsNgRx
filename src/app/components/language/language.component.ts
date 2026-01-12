@@ -6,11 +6,10 @@ import { Subscription } from 'rxjs';
 import { Language } from '../../models/enums';
 
 @Component({
-  selector: 'app-language',
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
-  templateUrl: './language.component.html',
-  styleUrls: ['./language.component.scss'],
+    selector: 'app-language',
+    imports: [CommonModule, FormsModule, TranslateModule],
+    templateUrl: './language.component.html',
+    styleUrls: ['./language.component.scss']
 })
 export class LanguageComponent implements OnInit, OnDestroy {
   @Input() id: string = '';

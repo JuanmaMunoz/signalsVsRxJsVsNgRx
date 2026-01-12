@@ -7,11 +7,10 @@ import { setInitialState } from '../../store/players.actions';
 import { PlayerState } from '../../store/players.reducers';
 
 @Component({
-  selector: 'app-example-introduction',
-  standalone: true,
-  imports: [TranslateModule],
-  templateUrl: './example-introduction.component.html',
-  styleUrl: './example-introduction.component.scss',
+    selector: 'app-example-introduction',
+    imports: [TranslateModule],
+    templateUrl: './example-introduction.component.html',
+    styleUrl: './example-introduction.component.scss'
 })
 export class ExampleIntroductionComponent {
   @Input() example!: IExample;

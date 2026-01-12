@@ -14,19 +14,18 @@ import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
 
 @Component({
-  selector: 'app-rxjs-example',
-  standalone: true,
-  imports: [
-    PlayerComponent,
-    ChartComponent,
-    CommonModule,
-    ExecutionComponent,
-    ErrorComponent,
-    ExampleIntroductionComponent,
-    ExampleCodeComponent,
-  ],
-  templateUrl: './rxjs-example.component.html',
-  styleUrl: './rxjs-example.component.scss',
+    selector: 'app-rxjs-example',
+    imports: [
+        PlayerComponent,
+        ChartComponent,
+        CommonModule,
+        ExecutionComponent,
+        ErrorComponent,
+        ExampleIntroductionComponent,
+        ExampleCodeComponent,
+    ],
+    templateUrl: './rxjs-example.component.html',
+    styleUrl: './rxjs-example.component.scss'
 })
 export class RxjsExampleComponent implements OnInit, OnDestroy {
   public chartDataSets: IDataset[] = [];

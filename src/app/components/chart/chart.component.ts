@@ -3,11 +3,10 @@ import { Chart } from 'chart.js/auto';
 import { ICharData, IDataset } from '../../models/interfaces';
 
 @Component({
-  selector: 'app-chart',
-  standalone: true,
-  imports: [],
-  templateUrl: './chart.component.html',
-  styleUrl: './chart.component.scss',
+    selector: 'app-chart',
+    imports: [],
+    templateUrl: './chart.component.html',
+    styleUrl: './chart.component.scss'
 })
 export class ChartComponent implements AfterViewInit {
   @Input() idChart: string = '';

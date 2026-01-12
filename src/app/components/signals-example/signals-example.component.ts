@@ -13,11 +13,10 @@ import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
 
 @Component({
-  selector: 'app-signals-example',
-  standalone: true,
-  imports: [PlayerComponent, ChartComponent, ExecutionComponent, ErrorComponent, ExampleIntroductionComponent, ExampleCodeComponent],
-  templateUrl: './signals-example.component.html',
-  styleUrl: './signals-example.component.scss',
+    selector: 'app-signals-example',
+    imports: [PlayerComponent, ChartComponent, ExecutionComponent, ErrorComponent, ExampleIntroductionComponent, ExampleCodeComponent],
+    templateUrl: './signals-example.component.html',
+    styleUrl: './signals-example.component.scss'
 })
 export class SignalsExampleComponent implements OnInit {
   public players = signal<IPlayer[]>([]);

@@ -16,20 +16,19 @@ import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
 declare var Prism: any;
 @Component({
-  selector: 'app-ngrx-example',
-  standalone: true,
-  imports: [
-    PlayerComponent,
-    ChartComponent,
-    CommonModule,
-    ExecutionComponent,
-    ErrorComponent,
-    ErrorComponent,
-    ExampleIntroductionComponent,
-    ExampleCodeComponent,
-  ],
-  templateUrl: './ngrx-example.component.html',
-  styleUrl: './ngrx-example.component.scss',
+    selector: 'app-ngrx-example',
+    imports: [
+        PlayerComponent,
+        ChartComponent,
+        CommonModule,
+        ExecutionComponent,
+        ErrorComponent,
+        ErrorComponent,
+        ExampleIntroductionComponent,
+        ExampleCodeComponent,
+    ],
+    templateUrl: './ngrx-example.component.html',
+    styleUrl: './ngrx-example.component.scss'
 })
 export class NgrxExampleComponent implements OnInit, OnDestroy, AfterViewChecked {
   public chartDataSets: IDataset[] = [];

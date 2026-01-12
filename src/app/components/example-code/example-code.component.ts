@@ -4,11 +4,10 @@ import { IExample } from '../../models/interfaces';
 import { CodeComponent } from '../code/code.component';
 
 @Component({
-  selector: 'app-example-code',
-  standalone: true,
-  imports: [CodeComponent],
-  templateUrl: './example-code.component.html',
-  styleUrl: './example-code.component.scss',
+    selector: 'app-example-code',
+    imports: [CodeComponent],
+    templateUrl: './example-code.component.html',
+    styleUrl: './example-code.component.scss'
 })
 export class ExampleCodeComponent {
   @Input() example!: IExample;

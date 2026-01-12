@@ -17,20 +17,19 @@ import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
 declare var Prism: any;
 @Component({
-  selector: 'app-ngrx-signal-example',
-  standalone: true,
-  imports: [
-    PlayerComponent,
-    ChartComponent,
-    CommonModule,
-    ExecutionComponent,
-    ErrorComponent,
-    ErrorComponent,
-    ExampleIntroductionComponent,
-    ExampleCodeComponent,
-  ],
-  templateUrl: './ngrx-signal-example.component.html',
-  styleUrl: './ngrx-signal-example.component.scss',
+    selector: 'app-ngrx-signal-example',
+    imports: [
+        PlayerComponent,
+        ChartComponent,
+        CommonModule,
+        ExecutionComponent,
+        ErrorComponent,
+        ErrorComponent,
+        ExampleIntroductionComponent,
+        ExampleCodeComponent,
+    ],
+    templateUrl: './ngrx-signal-example.component.html',
+    styleUrl: './ngrx-signal-example.component.scss'
 })
 export class NgrxSignalExampleComponent implements AfterViewChecked {
   public chartDataSets: IDataset[] = [];
