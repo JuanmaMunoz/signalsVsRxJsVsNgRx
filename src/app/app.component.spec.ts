@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -20,9 +20,9 @@ describe('AppComponent', () => {
     });
 
     await TestBed.configureTestingModule({
-      imports: [AppComponent, TranslateModule.forRoot(), HttpClientModule, StoreModule.forRoot()],
-      providers: [{ provide: TranslateService, useValue: translateService }, UtilsService, PlayersService],
-    }).compileComponents();
+    imports: [AppComponent, TranslateModule.forRoot(), StoreModule.forRoot()],
+    providers: [{ provide: TranslateService, useValue: translateService }, UtilsService, PlayersService, provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
   });
