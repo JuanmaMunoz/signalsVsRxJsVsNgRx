@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { LanguageComponent } from '../language/language.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [LanguageComponent],
+  imports: [LanguageComponent, SpinnerComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  public img: string = 'assets/images/vs.png';
+  public img = 'assets/images/vs.png';
 }

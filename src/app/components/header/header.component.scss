@@ -8,10 +8,10 @@
   }
   &__text {
     animation: showText 0.5s ease-out 0.5s forwards;
-    color: #ed168fff;
+    color: var(--bs-primary);
     opacity: 0;
     &--secondary {
-      color: #4b2074ff;
+      color: var(--bs-secondary);
     }
   }
   &__logo {

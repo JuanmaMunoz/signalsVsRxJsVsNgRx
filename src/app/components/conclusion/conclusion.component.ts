@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-conclusion',
-  standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, SpinnerComponent],
   templateUrl: './conclusion.component.html',
   styleUrl: './conclusion.component.scss',
 })
 export class ConclusionComponent {
-  public image: string = 'assets/images/photo.jpg';
+  public image = 'assets/images/photo.jpg';
 }

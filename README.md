@@ -1,27 +1,49 @@
-# signalsVsRxJsVsNgRx
+# signals Vs RxJS Vs NgRx
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+Explore a comprehensive comparison between Angular Signals, RxJS Subjects, and NgRx for state and data management. Learn their pros, cons, and best use cases.
+
+## 🛠️ Tech Stack
+
+- Angular 20
+- NgRx 20
+- RxJS 7.8
+- Bootstrap 5.3
+- Jasmine
+
+## Install dependecies
+
+```bash
+npm install
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+To start a local development server, run:
 
-## Code scaffolding
+```bash
+ng serve
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Build
+## Building
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To build the project run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `docs/` directory. By default, the production build optimizes your application for performance and speed.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-## Running end-to-end tests
+```bash
+ng test:dev
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Author
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Juan Manuel Muñoz González

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, finalize, Subscription } from 'rxjs';
+import { AfterViewChecked, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, finalize } from 'rxjs';
 import { examples } from '../../info/info';
 import { IDataset, IExample, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
@@ -15,7 +16,6 @@ import { PlayerComponent } from '../player/player.component';
 
 @Component({
   selector: 'app-rxjs-example',
-  standalone: true,
   imports: [
     PlayerComponent,
     ChartComponent,
@@ -28,31 +28,24 @@ import { PlayerComponent } from '../player/player.component';
   templateUrl: './rxjs-example.component.html',
   styleUrl: './rxjs-example.component.scss',
 })
-export class RxjsExampleComponent implements OnInit, OnDestroy {
+export class RxjsExampleComponent implements AfterViewChecked {
   public chartDataSets: IDataset[] = [];
-  public players$: BehaviorSubject<IPlayer[]> = new BehaviorSubject([] as IPlayer[]);
-  public error$: BehaviorSubject<HttpErrorResponse | null> = new BehaviorSubject<HttpErrorResponse | null>(null);
-  public loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public players$ = new BehaviorSubject<IPlayer[]>([]);
+  public error$ = new BehaviorSubject<HttpErrorResponse | null>(null);
+  public loading$ = new BehaviorSubject<boolean>(false);
   public startTime!: DOMHighResTimeStamp;
-  public totalTime: string = '0';
-  public startRendering: boolean = false;
-  private subscription = new Subscription();
+  public totalTime = '0';
+  public startRendering = false;
   public example: IExample = examples.find((e: IExample) => e.title === 'rxjs')!;
-  constructor(
-    public playersService: PlayersService,
-    private chartService: ChartService,
-  ) {}
+  private playersService = inject(PlayersService);
+  private chartService = inject(ChartService);
 
-  ngOnInit(): void {
-    this.subscription.add(
-      this.players$.subscribe((players: IPlayer[]) => {
-        if (players.length) {
-          this.chartDataSets = this.chartService.createDataSets(players);
-          this.startRendering = true;
-        }
-      }),
-    );
-  }
+  private subscription = this.players$.pipe(takeUntilDestroyed()).subscribe((players: IPlayer[]) => {
+    if (players.length) {
+      this.chartDataSets = this.chartService.createDataSets(players);
+      this.startRendering = true;
+    }
+  });
 
   ngAfterViewChecked(): void {
     if (this.startRendering) {
@@ -62,10 +55,6 @@ export class RxjsExampleComponent implements OnInit, OnDestroy {
         this.totalTime = time;
       }, 0);
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   public getPlayers(): void {

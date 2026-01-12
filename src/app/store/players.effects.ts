@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PlayersService } from './../services/players.service';
 
@@ -8,10 +8,8 @@ import { loadPlayers, loadPlayersFailure, loadPlayersSuccess } from './players.a
 
 @Injectable()
 export class PlayerEffects {
-  constructor(
-    private actions$: Actions,
-    private playersService: PlayersService,
-  ) {}
+  private actions$ = inject(Actions);
+  private playersService = inject(PlayersService);
 
   loadPlayers$ = createEffect(() =>
     this.actions$.pipe(

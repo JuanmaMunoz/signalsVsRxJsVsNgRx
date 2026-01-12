@@ -4,18 +4,17 @@ import { ICharData, IDataset } from '../../models/interfaces';
 
 @Component({
   selector: 'app-chart',
-  standalone: true,
   imports: [],
   templateUrl: './chart.component.html',
   styleUrl: './chart.component.scss',
 })
 export class ChartComponent implements AfterViewInit {
-  @Input() idChart: string = '';
+  @Input() idChart = '';
   @Input() dataSets: IDataset[] = [];
   @ViewChild('canvas') canvas!: HTMLCanvasElement;
   @ViewChild('canvasLine') canvasLine!: HTMLCanvasElement;
-  public chart: any = null;
-  public chartLine: any = null;
+  public chart: Chart | null = null;
+  public chartLine: Chart | null = null;
   public chartData!: ICharData;
 
   ngAfterViewInit(): void {
@@ -31,7 +30,7 @@ export class ChartComponent implements AfterViewInit {
     if (this.chart) this.chart.destroy();
     const ctx = document.getElementById(this.idChart);
 
-    this.chart = new Chart(ctx as any, {
+    this.chart = new Chart(ctx as HTMLCanvasElement, {
       type: 'radar',
       data: this.chartData,
       options: {
@@ -77,9 +76,9 @@ export class ChartComponent implements AfterViewInit {
   }
 
   private createChartLine(): void {
-    if (this.chartLine) this.chart.destroy();
+    if (this.chartLine) this.chartLine.destroy();
     const ctx = document.getElementById(this.idChart + 'line');
-    this.chartLine = new Chart(ctx as any, {
+    this.chartLine = new Chart(ctx as HTMLCanvasElement, {
       type: 'line',
       data: this.chartData,
     });

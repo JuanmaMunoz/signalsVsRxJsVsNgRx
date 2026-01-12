@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Chart } from 'chart.js';
 import { ChartComponent } from './chart.component';
 
 describe('ChartComponent', () => {
@@ -7,7 +8,7 @@ describe('ChartComponent', () => {
   let fixture: ComponentFixture<ChartComponent>;
   const mockChart = {
     destroy: jasmine.createSpy('destroy'),
-  };
+  } as unknown as Chart;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ChartComponent],
@@ -16,8 +17,8 @@ describe('ChartComponent', () => {
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;
     component.idChart = 'x';
-    component.chart = mockChart as any;
-    component.chartLine = mockChart as any;
+    component.chart = mockChart;
+    component.chartLine = mockChart;
     fixture.detectChanges();
   });
 
