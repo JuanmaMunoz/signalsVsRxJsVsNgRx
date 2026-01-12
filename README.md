@@ -1,4 +1,4 @@
-# signals Vs RxJs Vs NgRx
+# signals Vs RxJS Vs NgRx
 
 Explore a comprehensive comparison between Angular Signals, RxJS Subjects, and NgRx for state and data management. Learn their pros, cons, and best use cases.
 
