@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, Component, effect, inject, Signal } from '@angular/core';
+import { AfterViewChecked, Component, effect, inject, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { Store } from '@ngrx/store';
@@ -14,9 +14,7 @@ import { ExampleCodeComponent } from '../example-code/example-code.component';
 import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
-declare const Prism: {
-  highlightAll: () => void;
-};
+
 @Component({
   selector: 'app-ngrx-signal-example',
   imports: [
@@ -31,7 +29,7 @@ declare const Prism: {
   templateUrl: './ngrx-signal-example.component.html',
   styleUrl: './ngrx-signal-example.component.scss',
 })
-export class NgrxSignalExampleComponent implements AfterViewInit, AfterViewChecked {
+export class NgrxSignalExampleComponent implements AfterViewChecked {
   public chartDataSets: IDataset[] = [];
   public startTime!: DOMHighResTimeStamp;
   public totalTime = '0';
@@ -70,10 +68,6 @@ export class NgrxSignalExampleComponent implements AfterViewInit, AfterViewCheck
         this.totalTime = time;
       }, 0);
     }
-  }
-
-  ngAfterViewInit(): void {
-    Prism.highlightAll();
   }
 
   public getPlayers(): void {

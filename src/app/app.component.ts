@@ -9,6 +9,7 @@ import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.com
 import { NgrxSignalExampleComponent } from './components/ngrx-signal-example/ngrx-signal-example.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { SignalsExampleComponent } from './components/signals-example/signals-example.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TableComponent } from './components/table/table.component';
 import { serviceCode } from './info/info';
 import { Language } from './models/enums';
@@ -27,6 +28,7 @@ import { UtilsService } from './services/utils.service';
     NgrxExampleComponent,
     NgrxSignalExampleComponent,
     ConclusionComponent,
+    SpinnerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

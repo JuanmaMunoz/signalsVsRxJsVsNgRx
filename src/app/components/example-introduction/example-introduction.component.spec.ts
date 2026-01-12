@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, DeferBlockState, TestBed } from '@angular/core/testing';
 
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -62,15 +62,21 @@ describe('ExampleIntroductionComponent', () => {
     expect(dispatchSpy).toHaveBeenCalledWith(setInitialState());
   });
 
-  it('should to have h1 with the text "rxjs title" and the description "rxjs description"', () => {
+  it('should to have h1 with the text "rxjs title" and the description "rxjs description"', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
+
     const compiled = fixture.nativeElement as HTMLElement;
     const h1 = compiled.querySelector('h1');
-    const desc = compiled.querySelector('div.text-secondary');
+    const desc = compiled.querySelector('.text-secondary');
+
     expect(h1?.textContent).toContain('rxjs title');
     expect(desc?.textContent).toContain('rxjs description');
   });
 
-  it('should to have h1 with the text "ngrx title" , the description "ngrx description" and should to have one input', () => {
+  it('should to have h1 with the text "ngrx title" , the description "ngrx description" and should to have one input', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
     component.example = {
       componentCode: 'code ngrx',
       htmlCode: '<h1>ngrx</h1>',

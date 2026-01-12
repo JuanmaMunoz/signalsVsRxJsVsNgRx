@@ -20,17 +20,8 @@ describe('NgrxSignalExampleComponent', () => {
     error: null,
   };
   let chartServiceSpy = jasmine.createSpyObj('ChartService', ['createDataSets']);
-  interface WindowWithPrism extends Window {
-    Prism: {
-      highlightAll: jasmine.Spy;
-    };
-  }
 
   beforeEach(async () => {
-    (window as unknown as WindowWithPrism).Prism = {
-      highlightAll: jasmine.createSpy('highlightAll'),
-    };
-
     await TestBed.configureTestingModule({
       imports: [NgrxSignalExampleComponent, TranslateModule.forRoot()],
       providers: [provideMockStore({ initialState }), { provide: ChartService, useValue: chartServiceSpy }],

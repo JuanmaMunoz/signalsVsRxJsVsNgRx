@@ -5,10 +5,11 @@ import { IExample } from '../../models/interfaces';
 import { UtilsService } from '../../services/utils.service';
 import { setInitialState } from '../../store/players.actions';
 import { PlayerState } from '../../store/players.reducers';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-example-introduction',
-  imports: [TranslateModule],
+  imports: [TranslateModule, SpinnerComponent],
   templateUrl: './example-introduction.component.html',
   styleUrl: './example-introduction.component.scss',
 })

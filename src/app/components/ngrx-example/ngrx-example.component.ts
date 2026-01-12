@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, Component, inject } from '@angular/core';
+import { AfterViewChecked, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -15,9 +15,7 @@ import { ExampleCodeComponent } from '../example-code/example-code.component';
 import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
-declare const Prism: {
-  highlightAll: () => void;
-};
+
 @Component({
   selector: 'app-ngrx-example',
   imports: [
@@ -33,7 +31,7 @@ declare const Prism: {
   templateUrl: './ngrx-example.component.html',
   styleUrl: './ngrx-example.component.scss',
 })
-export class NgrxExampleComponent implements AfterViewChecked, AfterViewInit {
+export class NgrxExampleComponent implements AfterViewChecked {
   public chartDataSets: IDataset[] = [];
   public startTime!: DOMHighResTimeStamp;
   public totalTime = '0';
@@ -52,10 +50,6 @@ export class NgrxExampleComponent implements AfterViewChecked, AfterViewInit {
       this.startRendering = true;
     }
   });
-
-  ngAfterViewInit(): void {
-    Prism.highlightAll();
-  }
 
   ngAfterViewChecked(): void {
     if (this.startRendering) {
