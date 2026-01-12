@@ -2,12 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { ExampleCodeComponent } from './example-code.component';
+interface WindowWithPrism extends Window {
+  Prism: {
+    highlightAll: jasmine.Spy;
+  };
+}
 
 describe('ExampleCodeComponent', () => {
   let component: ExampleCodeComponent;
   let fixture: ComponentFixture<ExampleCodeComponent>;
 
   beforeEach(async () => {
+    (window as unknown as WindowWithPrism).Prism = {
+      highlightAll: jasmine.createSpy('highlightAll'),
+    };
     await TestBed.configureTestingModule({
       imports: [ExampleCodeComponent, TranslateModule.forRoot()],
     }).compileComponents();

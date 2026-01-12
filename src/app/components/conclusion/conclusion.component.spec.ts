@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, DeferBlockState, TestBed } from '@angular/core/testing';
 
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConclusionComponent } from './conclusion.component';
@@ -34,31 +34,41 @@ describe('ConclusionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should to exist the title', () => {
+  it('should to exist the title', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
     const compiled = fixture.nativeElement as HTMLElement;
     const h2 = compiled.querySelector('h2');
     expect(h2?.textContent).toContain('Conclusion Title');
   });
 
-  it('should to exist description', () => {
+  it('should to exist description', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
     const compiled = fixture.nativeElement as HTMLElement;
     const desc = compiled.querySelector('div.col-md-6.text-secondary');
     expect(desc?.textContent).toContain('This is the conclusion description');
   });
 
-  it('should to exist the img', () => {
+  it('should to exist the img', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
     const compiled = fixture.nativeElement as HTMLElement;
     const img = compiled.querySelector('img');
     expect(img).toBeTruthy();
   });
 
-  it('should to exist the autor´s name', () => {
+  it('should to exist the autor´s name', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
     const compiled = fixture.nativeElement as HTMLElement;
     const h6 = compiled.querySelector('h6');
     expect(h6?.textContent).toContain('Juan Manuel Muñoz González');
   });
 
-  it('should to exist the corrects urls', () => {
+  it('should to exist the corrects urls', async () => {
+    const deferBlock = await fixture.getDeferBlocks();
+    await deferBlock[0].render(DeferBlockState.Complete);
     const compiled = fixture.nativeElement as HTMLElement;
     const links = compiled.querySelectorAll('a');
     expect(links[0]?.getAttribute('href')).toBe('https://www.linkedin.com/in/juan-manuel-mu%C3%B1oz-gonz%C3%A1lez/');

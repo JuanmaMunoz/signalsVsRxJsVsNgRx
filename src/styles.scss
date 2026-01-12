@@ -1,13 +1,14 @@
-@import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+@use 'sass:map';
+@use 'sass:color';
 
 $blue: #0d6efd;
 $indigo: #6610f2;
 $purple: #6f42c1;
 $pink: #d63384;
-$red: #d34351;
-$orange: #eca367;
+$red: #e35d6a;
+$orange: #f2a65a;
 $yellow: #ffc107;
-$green: #690;
+$green: #7fb039;
 $teal: #20c997;
 $cyan: #5ac8fa;
 $white: #fff;
@@ -22,20 +23,16 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black: #000;
 
-//$primary: #ed168fff;
-//$secondary: #4b2074ff;
 $primary: #ee5b97;
 $secondary: #6d3b8e;
 $success: $green;
 $info: $cyan;
 $warning: $orange;
 $danger: $red;
-//$light: #fdf4fc;
 $light: white;
 $dark: #1a1a1a;
-//$dark: #212529;
 
-$theme-colors: (
+$my-theme-colors: (
   'primary': $primary,
   'secondary': $secondary,
   'success': $success,
@@ -46,13 +43,15 @@ $theme-colors: (
   'dark': $dark,
 );
 
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@use 'bootstrap-icons/font/bootstrap-icons.scss';
+@use 'bootstrap/scss/bootstrap.scss' with (
+  $theme-colors: $my-theme-colors,
+  $form-check-input-checked-bg-color: $primary,
+  $form-check-input-checked-border-color: $primary
+);
 
 body {
-  //background-color: var(--bs-dark);
   font-family: 'Roboto', serif;
-  //font-size: 1.1rem;
-  //font-weight: 500;
   overflow-x: hidden;
 }
 

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Language } from './../../models/enums';
 
 import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { LanguageComponent } from './language.component';
 
 describe('LanguageComponent', () => {
@@ -43,7 +44,7 @@ describe('LanguageComponent', () => {
   });
 
   it('should unsubscribe on ngOnDestroy', () => {
-    const spy = spyOn<any>(component['subscription'], 'unsubscribe');
+    const spy = spyOn(component['subscription'] as Subscription, 'unsubscribe');
     component.ngOnDestroy();
     expect(spy).toHaveBeenCalled();
   });

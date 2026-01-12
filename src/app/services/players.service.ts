@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { delay, Observable } from 'rxjs';
 import { IPlayer } from '../models/interfaces';
 
@@ -7,7 +7,7 @@ import { IPlayer } from '../models/interfaces';
   providedIn: 'root',
 })
 export class PlayersService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   public getPlayers(): Observable<IPlayer[]> {
     const url = 'assets/data/players.json';

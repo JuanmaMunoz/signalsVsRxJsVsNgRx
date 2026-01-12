@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CodeComponent } from './components/code/code.component';
@@ -9,6 +9,7 @@ import { NgrxExampleComponent } from './components/ngrx-example/ngrx-example.com
 import { NgrxSignalExampleComponent } from './components/ngrx-signal-example/ngrx-signal-example.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { SignalsExampleComponent } from './components/signals-example/signals-example.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TableComponent } from './components/table/table.component';
 import { serviceCode } from './info/info';
 import { Language } from './models/enums';
@@ -16,7 +17,6 @@ import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     HeaderComponent,
     IntroductionComponent,
@@ -28,17 +28,16 @@ import { UtilsService } from './services/utils.service';
     NgrxExampleComponent,
     NgrxSignalExampleComponent,
     ConclusionComponent,
+    SpinnerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   public serviceCode: string = serviceCode;
-  constructor(
-    private translate: TranslateService,
-    public utilsService: UtilsService,
-  ) {}
+  private translate = inject(TranslateService);
+  public utilsService = inject(UtilsService);
 
   ngOnInit(): void {
     const lang = localStorage.getItem('language') || Language.ENGLISH;

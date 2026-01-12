@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -12,7 +12,7 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let translateService: jasmine.SpyObj<TranslateService>;
-  let onLangChangeSubject: Subject<any>;
+  let onLangChangeSubject: Subject<unknown>;
   beforeEach(async () => {
     onLangChangeSubject = new Subject();
     translateService = jasmine.createSpyObj('TranslateService', ['use'], {
@@ -20,8 +20,13 @@ describe('AppComponent', () => {
     });
 
     await TestBed.configureTestingModule({
-      imports: [AppComponent, TranslateModule.forRoot(), HttpClientModule, StoreModule.forRoot()],
-      providers: [{ provide: TranslateService, useValue: translateService }, UtilsService, PlayersService],
+      imports: [AppComponent, TranslateModule.forRoot(), StoreModule.forRoot()],
+      providers: [
+        { provide: TranslateService, useValue: translateService },
+        UtilsService,
+        PlayersService,
+        provideHttpClient(withInterceptorsFromDi()),
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;

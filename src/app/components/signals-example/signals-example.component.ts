@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, effect, OnInit, signal } from '@angular/core';
+import { AfterViewChecked, Component, effect, inject, signal } from '@angular/core';
 import { finalize } from 'rxjs';
 import { examples } from '../../info/info';
 import { IDataset, IExample, IPlayer } from '../../models/interfaces';
@@ -14,33 +14,29 @@ import { PlayerComponent } from '../player/player.component';
 
 @Component({
   selector: 'app-signals-example',
-  standalone: true,
   imports: [PlayerComponent, ChartComponent, ExecutionComponent, ErrorComponent, ExampleIntroductionComponent, ExampleCodeComponent],
   templateUrl: './signals-example.component.html',
   styleUrl: './signals-example.component.scss',
 })
-export class SignalsExampleComponent implements OnInit {
+export class SignalsExampleComponent implements AfterViewChecked {
   public players = signal<IPlayer[]>([]);
   public loading = signal<boolean>(false);
   public error = signal<HttpErrorResponse | null>(null);
   public chartDataSets: IDataset[] = [];
   public startTime!: DOMHighResTimeStamp;
-  public totalTime: string = '0';
-  public startRendering: boolean = false;
+  public totalTime = '0';
+  public startRendering = false;
   public example: IExample = examples.find((e: IExample) => e.title === 'signal')!;
-  constructor(
-    private playersService: PlayersService,
-    private chartService: ChartService,
-  ) {
-    effect(() => {
-      if (this.players().length) {
-        this.chartDataSets = this.chartService.createDataSets(this.players());
-        this.startRendering = true;
-      }
-    });
-  }
 
-  ngOnInit(): void {}
+  private playersService = inject(PlayersService);
+  private chartService = inject(ChartService);
+
+  private effect = effect(() => {
+    if (this.players().length) {
+      this.chartDataSets = this.chartService.createDataSets(this.players());
+      this.startRendering = true;
+    }
+  });
 
   public getPlayers(): void {
     this.startTime = performance.now();

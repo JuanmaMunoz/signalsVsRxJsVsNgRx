@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { examples } from '../../info/info';
 import { IDataset, IExample, IPlayer } from '../../models/interfaces';
 import { ChartService } from '../../services/chart.service';
@@ -14,10 +15,9 @@ import { ExampleCodeComponent } from '../example-code/example-code.component';
 import { ExampleIntroductionComponent } from '../example-introduction/example-introduction.component';
 import { ExecutionComponent } from '../execution/execution.component';
 import { PlayerComponent } from '../player/player.component';
-declare var Prism: any;
+
 @Component({
   selector: 'app-ngrx-example',
-  standalone: true,
   imports: [
     PlayerComponent,
     ChartComponent,
@@ -31,38 +31,26 @@ declare var Prism: any;
   templateUrl: './ngrx-example.component.html',
   styleUrl: './ngrx-example.component.scss',
 })
-export class NgrxExampleComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class NgrxExampleComponent implements AfterViewChecked {
   public chartDataSets: IDataset[] = [];
-  public players$!: Observable<IPlayer[]>;
-  public loading$!: Observable<boolean>;
-  public error$!: Observable<HttpErrorResponse | null>;
   public startTime!: DOMHighResTimeStamp;
-  public totalTime: string = '0';
-  public startRendering: boolean = false;
-  private subscription = new Subscription();
+  public totalTime = '0';
+  public startRendering = false;
   public example: IExample = examples.find((e: IExample) => e.title === 'ngrx')!;
-  constructor(
-    private store: Store<{ players: PlayerState }>,
-    private chartService: ChartService,
-  ) {
-    this.players$ = this.store.select((state) => state.players.players);
-    this.loading$ = this.store.select((state) => state.players.loading);
-    this.error$ = this.store.select((state) => state.players.error);
-  }
+  private store = inject(Store<{ players: PlayerState }>);
+  private chartService = inject(ChartService);
 
-  ngOnInit(): void {
-    this.subscription.add(
-      this.players$.subscribe((data: IPlayer[]) => {
-        if (data.length) {
-          this.chartDataSets = this.chartService.createDataSets(data);
-          this.startRendering = true;
-        }
-      }),
-    );
-  }
-  ngAfterViewInit(): void {
-    Prism.highlightAll();
-  }
+  public players$: Observable<IPlayer[]> = this.store.select((state) => state.players.players);
+  public loading$: Observable<boolean> = this.store.select((state) => state.players.loading);
+  public error$: Observable<HttpErrorResponse | null> = this.store.select((state) => state.players.error);
+
+  private subscription = this.players$?.pipe(takeUntilDestroyed()).subscribe((data: IPlayer[]) => {
+    if (data.length) {
+      this.chartDataSets = this.chartService.createDataSets(data);
+      this.startRendering = true;
+    }
+  });
+
   ngAfterViewChecked(): void {
     if (this.startRendering) {
       const time = (performance.now() - this.startTime - 250).toFixed(3);
@@ -71,9 +59,6 @@ export class NgrxExampleComponent implements OnInit, OnDestroy, AfterViewChecked
         this.totalTime = time;
       }, 0);
     }
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   public getPlayers(): void {
