@@ -122,10 +122,11 @@ export const examples: IExample[] = [
   private playersService = inject(PlayersService);
   private chartService = inject(ChartService);
 
-  private subscription = this.players$.pipe(takeUntilDestroyed()).subscribe((players: IPlayer[]) => {
-    if (players.length) {
-      this.chartDataSets = this.chartService.createDataSets(players);
-    }
+  private subscription = this.players$.pipe(takeUntilDestroyed())
+    .subscribe((players: IPlayer[]) => {
+      if (players.length) {
+        this.chartDataSets = this.chartService.createDataSets(players);
+      }
   });
 
   public getPlayers(): void {
@@ -172,10 +173,11 @@ export const examples: IExample[] = [
   private store = inject(Store<{ players: PlayerState }>);
   private chartService = inject(ChartService);
 
-  private subscription = this.players$.pipe(takeUntilDestroyed()).subscribe((data: IPlayer[]) => {
-    if (data.length) {
-      this.chartDataSets = this.chartService.createDataSets(data);
-    }
+  private subscription = this.players$.pipe(takeUntilDestroyed())
+    .subscribe((data: IPlayer[]) => {
+      if (data.length) {
+        this.chartDataSets = this.chartService.createDataSets(data);
+      }
   });
 
   public getPlayers(): void {
