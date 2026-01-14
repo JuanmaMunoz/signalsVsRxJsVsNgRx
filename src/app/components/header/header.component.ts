@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { LanguageComponent } from '../language/language.component';
-import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-header',
-  imports: [LanguageComponent, SpinnerComponent],
+  imports: [LanguageComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
