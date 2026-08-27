@@ -1,12 +1,12 @@
 <div class="execution mt-4">
   <div class="text-center">
     <button onclick="this.blur()" [disabled]="loading" (click)="getPlayers()" class="btn btn-lg btn-outline-primary">
-      <h2>Get Players <i class="bi bi-hand-index-thumb"></i></h2>
+      <span class="execution__cta">Get Players <i class="bi bi-hand-index-thumb"></i></span>
       @if (loading) {
         <app-spinner />
       } @else {
         <p class="text-secondary mb-0 fw-bold">{{ 'examples.performance' | translate }}</p>
-        <h5 class="fw-bold">{{ time }} <span class="text-secondary fs-5">ms</span></h5>
+        <p class="execution__time fw-bold mb-0">{{ time }} <span class="text-secondary fs-5">ms</span></p>
       }
     </button>
   </div>

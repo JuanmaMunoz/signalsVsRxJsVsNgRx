@@ -1,9 +1,22 @@
-<div class="header text-center" [style.background]="'url(assets/images/clouds_new.png) no-repeat center center'">
+<div class="header text-center">
+  <picture>
+    <source srcset="assets/images/clouds_new.webp" type="image/webp" />
+    <img
+      class="header__bg"
+      src="assets/images/clouds_new.png"
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      decoding="async"
+      width="2389"
+      height="1365"
+    />
+  </picture>
   <div class="header__language">
     <app-language />
   </div>
-  <img [src]="img" class="img-fluid header__logo" alt="RxJs Vs NgRxJs" />
-  <h1 class="header__text mt-5 d-none d-md-block">
+  <img [src]="img" width="320" height="243" class="img-fluid header__logo" alt="Signals Vs Subjects Vs NgRx" />
+  <h1 class="header__text header__title mt-5">
     Signals <span class="header__text header__text--secondary">Vs</span> Subjects
     <span class="header__text header__text--secondary">Vs</span> NgRx
   </h1>

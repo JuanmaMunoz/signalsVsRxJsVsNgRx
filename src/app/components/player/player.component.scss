@@ -1,6 +1,10 @@
 .player {
   position: relative;
   &__image {
+    img {
+      width: auto;
+      height: 80px;
+    }
     &__leyend {
       height: 0.2rem;
     }

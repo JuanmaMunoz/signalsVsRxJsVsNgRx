@@ -44,7 +44,7 @@ describe('ExecutionComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const spinners = compiled.querySelectorAll('app-spinner');
     const button = compiled.querySelector('button');
-    const ms = compiled.querySelector('h5');
+    const ms = compiled.querySelector('.execution__time');
     expect(spinners.length).toBe(0);
     expect(button?.disabled).toBe(false);
     expect(ms?.textContent).toContain(100);

@@ -23,9 +23,10 @@ describe('HeaderComponent', () => {
 
   it('shoul to have a img as background', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const header = compiled.querySelector('.header');
-    const style = window.getComputedStyle(header!);
-    expect(style.background).toContain('clouds_new.png');
+    const bg = compiled.querySelector('.header__bg') as HTMLImageElement;
+    expect(bg).toBeTruthy();
+    expect(bg.getAttribute('src')).toContain('clouds_new');
+    expect(bg.getAttribute('fetchpriority')).toBe('high');
   });
 
   it('shoul to have a img as logo', () => {

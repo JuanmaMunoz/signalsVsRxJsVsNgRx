@@ -8,5 +8,5 @@ import { LanguageComponent } from '../language/language.component';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  public img = 'assets/images/vs.png';
+  public img = 'assets/images/vs.webp';
 }

@@ -1,16 +1,16 @@
 <div class="example__code row">
   <div class="col-xl-6">
-    <app-code [code]="example.componentCode" [title]="'Component'" />
+    <app-code [code]="example.componentCode" [title]="'Component'" [level]="4" />
   </div>
   <div class="col-xl-6">
-    <app-code [code]="example.htmlCode" [title]="'Html'" />
+    <app-code [code]="example.htmlCode" [title]="'Html'" [level]="4" />
   </div>
   @if (example.title.includes('ngrx')) {
     <div class="col-xl-6">
-      <app-code [code]="actionsReducers" [title]="'Actions, Reducers'" />
+      <app-code [code]="actionsReducers" [title]="'Actions, Reducers'" [level]="4" />
     </div>
     <div class="col-xl-6">
-      <app-code [code]="effects" [title]="'Effects'" />
+      <app-code [code]="effects" [title]="'Effects'" [level]="4" />
     </div>
   }
 </div>

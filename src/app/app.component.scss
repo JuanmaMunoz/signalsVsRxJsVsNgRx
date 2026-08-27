@@ -1,8 +1,12 @@
 .app {
   background: linear-gradient(135deg, #f8f5f6 0%, #ffffff 100%);
   &__body {
+    display: block;
     margin-left: 5rem;
     margin-right: 5rem;
+  }
+  &__body-placeholder {
+    min-height: 100vh;
   }
 }
 

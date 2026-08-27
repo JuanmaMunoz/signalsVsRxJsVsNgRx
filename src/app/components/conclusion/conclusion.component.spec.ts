@@ -62,8 +62,8 @@ describe('ConclusionComponent', () => {
     const deferBlock = await fixture.getDeferBlocks();
     await deferBlock[0].render(DeferBlockState.Complete);
     const compiled = fixture.nativeElement as HTMLElement;
-    const h6 = compiled.querySelector('h6');
-    expect(h6?.textContent).toContain('Juan Manuel Muñoz González');
+    const name = compiled.querySelector('.conclusion__name');
+    expect(name?.textContent).toContain('Juan Manuel Muñoz González');
   });
 
   it('should to exist the corrects urls', async () => {

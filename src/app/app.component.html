@@ -1,9 +1,9 @@
-@defer (on viewport) {
-  <div class="app">
-    <div class="app__header">
-      <app-header />
-    </div>
-    <div class="app__body px-sm-5 px-3">
+<div class="app">
+  <div class="app__header">
+    <app-header />
+  </div>
+  @defer (on viewport) {
+    <main class="app__body px-sm-5 px-3">
       <div class="app__introduction mt-4 mt-sm-5">
         <app-introduction />
       </div>
@@ -27,8 +27,8 @@
       <div class="app__conclusion mt-4 mb-5">
         <app-conclusion />
       </div>
-    </div>
-  </div>
-} @placeholder {
-  <div class="mt-5 p-5"><app-spinner /></div>
-}
+    </main>
+  } @placeholder {
+    <div class="app__body-placeholder mt-5 p-5"><app-spinner /></div>
+  }
+</div>

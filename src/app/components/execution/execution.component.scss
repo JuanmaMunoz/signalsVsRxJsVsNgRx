@@ -2,6 +2,15 @@
   p {
     font-size: 0.85rem;
   }
+  p.execution__time {
+    font-size: 1.25rem;
+  }
+  &__cta {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
 }
 
 button {

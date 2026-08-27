@@ -9,5 +9,5 @@ import { SpinnerComponent } from '../spinner/spinner.component';
   styleUrl: './conclusion.component.scss',
 })
 export class ConclusionComponent {
-  public image = 'assets/images/photo.jpg';
+  public image = 'assets/images/photo.webp';
 }

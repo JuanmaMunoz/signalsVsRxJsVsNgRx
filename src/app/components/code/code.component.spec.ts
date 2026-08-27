@@ -29,9 +29,9 @@ describe('CodeComponent', () => {
     component.code = description;
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const h6 = compiled.querySelector('h6');
+    const heading = compiled.querySelector('.code__title');
     const code = compiled.querySelector('code');
-    expect(h6?.textContent).toContain(title);
+    expect(heading?.textContent).toContain(title);
     expect(code?.textContent).toContain(description);
   });
 });

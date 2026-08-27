@@ -9,7 +9,7 @@
     "dribbling": 95,
     "shotPower": 80,
     "color": "rgba(90, 200, 250, 1)",
-    "image": "assets/images/messi.png"
+    "image": "assets/images/messi.webp"
   },
   {
     "name": "Cristiano",
@@ -21,7 +21,7 @@
     "dribbling": 85,
     "shotPower": 95,
     "color": "rgba(254, 110, 242,1)",
-    "image": "assets/images/cristiano.png"
+    "image": "assets/images/cristiano.webp"
   },
   {
     "name": "Mbappé",
@@ -33,6 +33,6 @@
     "dribbling": 85,
     "shotPower": 90,
     "color": "rgba(75, 32, 116,1)",
-    "image": "assets/images/mbappe.png"
+    "image": "assets/images/mbappe.webp"
   }
 ]

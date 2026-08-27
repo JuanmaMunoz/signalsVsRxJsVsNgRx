@@ -1,0 +1,10 @@
+.example-introduction__title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .example-introduction__title {
+    font-size: 2rem;
+  }
+}

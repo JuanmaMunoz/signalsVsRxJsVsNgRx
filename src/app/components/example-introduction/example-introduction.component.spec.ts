@@ -67,7 +67,7 @@ describe('ExampleIntroductionComponent', () => {
     await deferBlock[0].render(DeferBlockState.Complete);
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const h1 = compiled.querySelector('h1');
+    const h1 = compiled.querySelector('.example-introduction__title');
     const desc = compiled.querySelector('.text-secondary');
 
     expect(h1?.textContent).toContain('rxjs title');
@@ -84,7 +84,7 @@ describe('ExampleIntroductionComponent', () => {
     };
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const h1 = compiled.querySelector('h1');
+    const h1 = compiled.querySelector('.example-introduction__title');
     const desc = compiled.querySelector('div.text-secondary');
     const inputs = compiled.querySelectorAll('input');
     expect(h1?.textContent).toContain('ngrx title');
