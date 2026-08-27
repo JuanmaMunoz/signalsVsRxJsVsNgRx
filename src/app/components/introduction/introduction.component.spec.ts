@@ -26,7 +26,7 @@ describe('IntroductionComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const h2 = compiled.querySelector('h2');
     const desc = compiled.querySelector('div.text-secondary');
-    const itemListComponents = compiled.querySelectorAll('app-item-list');
+    const itemListComponents = compiled.querySelectorAll('ul.introduction__list > li[appItemList]');
     expect(h2).toBeTruthy();
     expect(desc).toBeTruthy();
     expect(itemListComponents.length).toBe(items.length);
